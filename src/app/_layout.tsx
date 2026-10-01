@@ -1,41 +1,45 @@
-import { Stack } from "expo-router";
+import { Loading } from "@/components/Loading"
 import {
-    useFonts, 
-    Manrope_300Light, 
-    Manrope_400Regular, 
-    Manrope_500Medium, 
-    Manrope_600SemiBold 
+  Manrope_300Light,
+  Manrope_400Regular,
+  Manrope_500Medium,
+  Manrope_600SemiBold,
+  useFonts,
 } from "@expo-google-fonts/manrope"
-import { View, Text} from "react-native";
-import { Loading } from "@/components/Loading";
+import { Stack } from "expo-router"
+import { Text, View } from "react-native"
 
 export default function RootLayout() {
-    const [fontsLoaded] = useFonts({
-        Manrope_300Light, 
-        Manrope_400Regular, 
-        Manrope_500Medium, 
-        Manrope_600SemiBold
-    });
+  const [fontsLoaded] = useFonts({
+    Manrope_300Light,
+    Manrope_400Regular,
+    Manrope_500Medium,
+    Manrope_600SemiBold,
+  })
 
-    if(!fontsLoaded) {
-        return (
-            <View style={{
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "center"
-            }}>  
-                <Loading/>
-                <Text>Carregando dados...</Text>
-            </View>   
-        );
-    }
-
+  if (!fontsLoaded) {
     return (
-        <Stack screenOptions={{
-            headerShown: false
-        }}>
-            <Stack.Screen name="index" />
-            <Stack.Screen name="two-screem" />
-        </Stack>
-    );
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loading />
+        <Text>Carregando dados...</Text>
+      </View>
+    )
+  }
+
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="index" />
+      <Stack.Screen name="two-screem" />
+    </Stack>
+  )
 }

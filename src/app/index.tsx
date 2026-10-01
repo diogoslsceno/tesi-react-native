@@ -1,35 +1,17 @@
-import { router } from "expo-router";
-import { Text, View, Button, StyleSheet, Platform } from "react-native";
-import {fontFamily} from "@/styles/fontFamily";
+import { styles } from "@/screens/index-style"
+import { Text, View } from "react-native"
+export { textSize } from "@/styles/textSize"
 
 export default function Index() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Óla Mundo</Text>
-      <Text style={styles.subtitle}>Faculdade de Sistema de Informação</Text>
-      <Button
-        title="Fazer login"
-        onPress={() => {
-          router.navigate("/two-screem");
-        }}
-      />
+      <View style={styles.content}>
+        <Text style={styles.label}>Minha Rotina</Text>
+        <View style={styles.titleContent}>
+          <Text style={styles.title}>Olá, estudante!</Text>
+          <Text style={styles.subtitle}>Organize sua rotina acadêmica.</Text>
+        </View>
+      </View>
     </View>
-  );
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#f1f1f1",
-    flex: 1,
-    alignItems: "center",
-    marginTop: Platform.OS === "android" ? 42 : 0,
-  },
-  title: {
-    fontSize: 20,
-    fontFamily: fontFamily.semiBold,
-  },
-  subtitle: {
-    fontSize: 18,
-    fontFamily: fontFamily.regular,
-  },
-});
