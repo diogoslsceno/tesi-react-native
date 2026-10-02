@@ -58,3 +58,5 @@ code .
 # 3. Inicie o projeto
 npx expo start
 ```
+
+---
