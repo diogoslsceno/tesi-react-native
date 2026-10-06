@@ -10,10 +10,11 @@ export const styles = StyleSheet.create({
   },
   content: {
     paddingTop: Platform.OS === "android" ? 54 : 64,
-    paddingStart: 24,
+    paddingHorizontal: 24,
   },
   titleContent: {
     paddingTop: 28,
+    marginBottom: 32,
   },
   label: {
     fontSize: textSize.label,

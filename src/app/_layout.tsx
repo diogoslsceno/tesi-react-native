@@ -39,7 +39,7 @@ export default function RootLayout() {
       }}
     >
       <Stack.Screen name="index" />
-      <Stack.Screen name="two-screem" />
+      <Stack.Screen name="(tabs)" />
     </Stack>
   )
 }
