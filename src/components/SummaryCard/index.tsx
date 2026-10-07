@@ -1,23 +1,41 @@
-import { colors } from "@/styles/colors"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { ReactNode } from "react"
 import { Text, View } from "react-native"
 import { styles } from "./styles"
 
-export function SummaryCard() {
+type SummaryCardProps = {
+  total: number
+  title: string
+  subtitle: string
+  icon: ReactNode
+  textColor?: string
+}
+
+export function SummaryCard({
+  total,
+  title,
+  subtitle,
+  icon,
+  textColor,
+}: SummaryCardProps) {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <MaterialCommunityIcons
-          name="clipboard-alert"
-          color={colors.orange}
-          size={26}
-        />
-        <Text style={styles.textRow}>3</Text>
+        {icon}
+        <Text
+          style={[
+            styles.textRow,
+            {
+              color: textColor,
+            },
+          ]}
+        >
+          {total}
+        </Text>
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.titleContent}>Pendências</Text>
-        <Text style={styles.subtitleContent}>Para essa semana</Text>
+        <Text style={styles.titleContent}>{title}</Text>
+        <Text style={styles.subtitleContent}>{subtitle}</Text>
       </View>
     </View>
   )

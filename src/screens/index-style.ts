@@ -31,4 +31,12 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.regular,
     color: colors.text.secundary,
   },
+  cardContent: {
+    flexDirection: "row",
+    gap: 16,
+    paddingTop: 16,
+  },
+  card: {
+    flex: 1,
+  },
 })

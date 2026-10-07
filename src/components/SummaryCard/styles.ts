@@ -6,7 +6,10 @@ import { Platform, StyleSheet } from "react-native"
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    padding: 24,
+    paddingVertical: 24,
+    paddingStart: 24,
+    paddingBottom: 24,
+    paddingEnd: 16,
     borderRadius: 12,
   },
   row: {
@@ -15,7 +18,6 @@ export const styles = StyleSheet.create({
     gap: 8,
   },
   textRow: {
-    color: colors.orange,
     fontFamily: fontFamily.semiBold,
     fontSize: textSize.label,
     marginTop: Platform.OS === "android" ? -3 : -1,

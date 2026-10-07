@@ -1,5 +1,4 @@
 import { colors } from "@/styles/colors"
-import FontAwesome from "@expo/vector-icons/FontAwesome"
 import { AntDesign, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 import { Tabs } from "expo-router"
