@@ -11,7 +11,7 @@ export default function Index() {
       <View style={styles.content}>
         <Text style={styles.label}>Minha Rotina</Text>
         <View style={styles.titleContent}>
-          <Text style={styles.title}>Olá, estudante!</Text>
+          <Text style={styles.titlePrimary}>Olá, estudante!</Text>
           <Text style={styles.subtitle}>Organize sua rotina acadêmica.</Text>
         </View>
 
@@ -61,6 +61,10 @@ export default function Index() {
               }
             />
           </View>
+        </View>
+        <View style={styles.cardContent}>
+          <Text style={[styles.titleSecudary]}>Próximas Atividades</Text>
+          <Text style={styles.subtitle}>Ver mais</Text>
         </View>
       </View>
     </View>

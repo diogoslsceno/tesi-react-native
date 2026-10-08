@@ -21,9 +21,14 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.semiBold,
     color: colors.primary,
   },
-  title: {
+  titlePrimary: {
     color: colors.text.primary,
-    fontSize: textSize.title,
+    fontSize: textSize.title.primary,
+    fontFamily: fontFamily.semiBold,
+  },
+  titleSecudary: {
+    color: colors.text.secundary,
+    fontSize: textSize.title.secundary,
     fontFamily: fontFamily.semiBold,
   },
   subtitle: {

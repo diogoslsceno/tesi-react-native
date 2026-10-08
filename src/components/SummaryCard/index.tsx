@@ -3,10 +3,10 @@ import { Text, View } from "react-native"
 import { styles } from "./styles"
 
 type SummaryCardProps = {
-  total: number
+  total?: number
   title: string
   subtitle: string
-  icon: ReactNode
+  icon?: ReactNode
   textColor?: string
 }
 
@@ -19,19 +19,23 @@ export function SummaryCard({
 }: SummaryCardProps) {
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
-        {icon}
-        <Text
-          style={[
-            styles.textRow,
-            {
-              color: textColor,
-            },
-          ]}
-        >
-          {total}
-        </Text>
-      </View>
+      {(icon != null || total != null) && (
+        <View style={styles.row}>
+          {icon}
+          {total != null && (
+            <Text
+              style={[
+                styles.textRow,
+                {
+                  color: textColor,
+                },
+              ]}
+            >
+              {total}
+            </Text>
+          )}
+        </View>
+      )}
 
       <View style={styles.content}>
         <Text style={styles.titleContent}>{title}</Text>

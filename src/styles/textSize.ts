@@ -1,5 +1,8 @@
 export const textSize = {
-  title: 28,
+  title: {
+    primary: 28,
+    secundary: 22,
+  },
   label: 22,
   button: 18,
   subtitle: 16,

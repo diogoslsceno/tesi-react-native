@@ -1,29 +1,18 @@
-import { Button } from "@/components/button"
-import { colors } from "@/styles/colors"
-import { View } from "react-native"
+import { SummaryCard } from "@/components/SummaryCard"
+import { styles } from "@/screens/index-style"
+import { Text, View } from "react-native"
+export { textSize } from "@/styles/textSize"
 
-function login() {
-  console.log("Quero ir para casa")
-}
-
-export default function Discipline() {
+export default function Disciplines() {
   return (
-    <View
-      style={{
-        marginTop: 100,
-        flex: 1,
-      }}
-    >
-      <View
-        style={{
-          paddingHorizontal: 24,
-        }}
-      >
-        <Button
-          text="Salvar atividades"
-          color={colors.primary}
-          onPress={login}
-        />
+    <View style={styles.container}>
+      <View style={styles.content}>
+        <Text style={styles.label}>Minha Rotina</Text>
+        <View style={styles.titleContent}>
+          <Text style={styles.titlePrimary}>Minhas Disciplinas</Text>
+        </View>
+
+        <SummaryCard title="Banco de Dados II" subtitle="Prof. Roberto Silva" />
       </View>
     </View>
   )
