@@ -9,7 +9,7 @@
       "@/assets/*": [
         "./assets/*"
       ]
-    },
+    }
   },
   "include": [
     "**/*.ts",

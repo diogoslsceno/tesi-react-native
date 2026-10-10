@@ -1,19 +1,17 @@
-import { SummaryCard } from "@/components/SummaryCard"
-import { styles } from "@/screens/index-style"
-import { Text, View } from "react-native"
-export { textSize } from "@/styles/textSize"
+import { styles } from "@/components/DisciplineCard/style"
+import { colors } from "@/styles/colors"
+import Ionicons from "@expo/vector-icons/Ionicons"
+import { TextInput, View } from "react-native"
 
-export default function Disciplines() {
+export default function Discipline() {
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.label}>Minha Rotina</Text>
-        <View style={styles.titleContent}>
-          <Text style={styles.titlePrimary}>Minhas Disciplinas</Text>
-        </View>
-
-        <SummaryCard title="Banco de Dados II" subtitle="Prof. Roberto Silva" />
-      </View>
+    <View style={styles.SearchContainer}>
+      <Ionicons
+        name="search-outline"
+        size={24}
+        color={colors.icon.gray}
+      />
+      <TextInput style={styles.TextInputContent} />
     </View>
   )
 }

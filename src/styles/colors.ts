@@ -1,12 +1,16 @@
 export const colors = {
   primary: "#004AC6",
-  orange: "#BC4800",
+  orange: {
+    Primary: "#BC4800",
+    segondary: "#7D2D00",
+  },
   red: "#BA1A1A",
   white: "#FFFFFF",
   green: "#006E2F",
   text: {
     primary: "#191B23",
     secundary: "#434655",
+    segondary: "#434655",
     secundaryTranslucent: "rgba(67, 70, 85, 0.5)",
     green: "#007432",
     muted: "#6B7280",
@@ -25,4 +29,8 @@ export const colors = {
   borderLight: "#E1E2ED",
   borderLightTranslucent: "rgba(225, 226, 237, 0.3)",
   info: "#2563EB",
+  icon: {
+    blue: "#2563EB",
+    gray: "#737686",
+  },
 }

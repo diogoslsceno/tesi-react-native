@@ -21,6 +21,11 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.semiBold,
     color: colors.primary,
   },
+  title: {
+    fontSize: textSize.title.primary,
+    color: colors.text.primary,
+    fontFamily: fontFamily.semiBold,
+  },
   titlePrimary: {
     color: colors.text.primary,
     fontSize: textSize.title.primary,
@@ -32,16 +37,32 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.semiBold,
   },
   subtitle: {
-    fontSize: textSize.subtitle,
+    fontSize: textSize.subtitle.primary,
     fontFamily: fontFamily.regular,
     color: colors.text.secundary,
   },
   cardContent: {
     flexDirection: "row",
     gap: 16,
-    paddingTop: 16,
+    paddingTop: 24,
   },
   card: {
     flex: 1,
+  },
+  headerContent: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 32,
+  },
+  sectionTitle: {
+    fontSize: textSize.title.segundary,
+    color: colors.text.primary,
+    fontFamily: fontFamily.semiBold,
+  },
+  actionText: {
+    fontSize: textSize.subtitle.segundary,
+    color: colors.primary,
+    fontFamily: fontFamily.regular,
   },
 })
