@@ -10,7 +10,7 @@ type ActivityCardProps = {
     colorBackgroud: string
 };
 
-export default function ActivityCard({title, subTitle, dataTitle, alertTitle, textColor, colorBackgroud}: ActivityCardProps){
+export default function CardDiscipline({title, subTitle, dataTitle, alertTitle, textColor, colorBackgroud}: ActivityCardProps){
     return (
         <View style={styles.container}>
             <View style={styles.TopRow}>

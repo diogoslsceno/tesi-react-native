@@ -1,18 +1,16 @@
-import { Button } from "@/components/Button";
+import { styles } from "@/components/DisciplineCard/style";
 import { colors } from "@/styles/colors";
-import { View } from "react-native";
-
-export default function Dsiscipline() {
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { TextInput, View, } from "react-native";
+export default function Discipline() {
     return (
-        <View style={{
-            marginTop: 100,
-            flex: 1,
-        }}>
-            <View style={{
-                paddingHorizontal: 24,
-            }}>
-                <Button text="Salvar atividade" color={colors.primary}/>
-            </View>
-        </View>
+      <View style={styles.SearchContainer}>
+        <Ionicons 
+          name="search-outline"
+          size={24}
+          color={colors.icon.gray}
+        />
+        <TextInput style={styles.TextInputContent}></TextInput>
+      </View>
     )
 }

@@ -20,6 +20,8 @@ export const colors = {
         blue: "#EDEDF9",
     },
     border: "#C3C6D7",
-    info: "#2563EB", 
-
+    icon: {
+        blue: "#2563EB",
+        gray:"#737686",
+    },
 }

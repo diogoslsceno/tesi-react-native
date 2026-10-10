@@ -12,6 +12,17 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
   },
 
+  SearchContainer: {
+    backgroundColor: colors.background.gray,
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    
+  },
+
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -37,5 +48,8 @@ export const styles = StyleSheet.create({
     fontSize: textSize.subtitle.primary,
     fontFamily: fontFamily.regular,
     color: colors.text.segondary,
+  },
+  TextInputContent: {
+    flex: 1,
   },
 });

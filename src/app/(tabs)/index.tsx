@@ -1,9 +1,14 @@
-import ActivityCard from "@/components/activityCard";
+import { default as CardDiscipline } from "@/components/CardDiscipline";
 import DisciplineCard from "@/components/DisciplineCard";
 import { SummaryCard } from "@/components/SummaryCard";
 import { styles } from "@/screens/index-style";
 import { colors } from "@/styles/colors";
-import { FontAwesome6, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  FontAwesome6,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 export default function App() {
@@ -74,7 +79,7 @@ export default function App() {
 
           <View style={styles.cardContent}>
             <View style={styles.card}>
-              <ActivityCard
+              <CardDiscipline
                 alertTitle="Pendente"
                 dataTitle="Hoje, 23:59"
                 title="Trabalho Prático de SO"
@@ -87,7 +92,7 @@ export default function App() {
 
           <View style={styles.headerContent}>
             <View style={styles.card}>
-              <ActivityCard
+              <CardDiscipline
                 alertTitle="Em 3 dias"
                 dataTitle="25 out"
                 title="Lista de Exercícios 4"
@@ -109,10 +114,79 @@ export default function App() {
                 teacher="Prof. João Silva"
                 time="Segundas, 19:00 - 20:40"
                 room="Sala 204 - Bloco B"
-                borderColor={colors.info}
+                borderColor={colors.primary}
+                icon={
+                  <Ionicons
+                    name="code-slash-outline"
+                    size={24}
+                    color={colors.icon.gray}
+                  />
+                }
+                teacherIcon={
+                  <Ionicons
+                    name="person-outline"
+                    size={24}
+                    color={colors.text.segondary}
+                  />
+                }
+                timeIcon={
+                  <Ionicons
+                    name="time-outline"
+                    size={24}
+                    color={colors.text.segondary}
+                  />
+                }
+                roomIcon={
+                  <Ionicons
+                    name="location-outline"
+                    size={24}
+                    color={colors.text.segondary}
+                  />
+                }
               />
             </View>
           </View>
+
+          <View>
+            <View>
+              <DisciplineCard
+                title="Banco de Dados"
+                teacher="Profa. Marina Silva"
+                time="Ter, Qui 10:00 - 12:00"
+                room="Lab 4, Bloco B"
+                borderColor={colors.green}
+                icon={
+                  <FontAwesome           
+                    name="server" 
+                    size={24}             
+                    color={colors.icon.gray}
+                  />                      
+                }
+                teacherIcon={
+                  <Ionicons
+                    name="person-outline"
+                    size={24}
+                    color={colors.text.segondary}
+                  />
+                }
+                timeIcon={
+                  <Ionicons
+                    name="time-outline"
+                    size={24}
+                    color={colors.text.segondary}
+                  />
+                }
+                roomIcon={
+                  <Ionicons
+                    name="location-outline"
+                    size={24}
+                    color={colors.text.segondary}
+                  />
+                }
+              />
+            </View>
+          </View>
+
         </View>
       </View>
     </ScrollView>

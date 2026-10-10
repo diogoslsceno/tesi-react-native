@@ -1,5 +1,3 @@
-import { colors } from "@/styles/colors";
-import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 import { styles } from "./style";
 
@@ -9,42 +7,32 @@ type DisciplineCardProps = {
   time: string;
   room: string;
   borderColor: string;
+  icon: React.ReactNode;
+  timeIcon: React.ReactNode;
+  roomIcon: React.ReactNode;
+  teacherIcon: React.ReactNode;
 };
 
-export default function DisciplineCard({
-  title,
-  teacher,
-  time,
-  room,
-  borderColor,
-}: DisciplineCardProps) {
+export default function DisciplineCard({title, teacher, time, room, borderColor, icon, roomIcon, teacherIcon, timeIcon}: DisciplineCardProps) {
   return (
     <View style={[styles.container, { borderLeftColor: borderColor }]}>
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
-        <Ionicons name="code-slash-outline" size={24} color={borderColor} />
+        {icon}
       </View>
 
       <View style={styles.infoRow}>
-        <Ionicons
-          name="person-outline"
-          size={16}
-          color={colors.text.segondary}
-        />
+        {teacherIcon}
         <Text style={styles.infoText}>{teacher}</Text>
       </View>
 
       <View style={styles.infoRow}>
-        <Ionicons name="time-outline" size={16} color={colors.text.segondary} />
+        {timeIcon}
         <Text style={styles.infoText}>{time}</Text>
       </View>
 
       <View style={styles.infoRow}>
-        <Ionicons
-          name="location-outline"
-          size={16}
-          color={colors.text.segondary}
-        />
+        {roomIcon}
         <Text style={styles.infoText}>{room}</Text>
       </View>
     </View>
