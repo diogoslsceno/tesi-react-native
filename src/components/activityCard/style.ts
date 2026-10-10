@@ -1,0 +1,232 @@
+import { colors } from "@/styles/colors"
+import { fontFamily } from "@/styles/fontFamily"
+import { Platform, StyleSheet } from "react-native"
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background.primary,
+  },
+  content: {
+    paddingTop: Platform.OS === "android" ? 54 : 64,
+    paddingHorizontal: 24,
+    paddingBottom: 40,
+  },
+  header: {
+    position: "relative",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: 40,
+    marginBottom: 24,
+  },
+  headerButton: {
+    width: 32,
+    height: 32,
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 2,
+  },
+  headerTitle: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    fontSize: 21,
+    fontFamily: fontFamily.semiBold,
+    color: colors.primary,
+    zIndex: 1,
+  },
+  screenTitleContainer: {
+    marginBottom: 20,
+  },
+  screenTitle: {
+    fontSize: 28,
+    fontFamily: fontFamily.bold,
+    color: colors.text.primary,
+  },
+  card: {
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    padding: 20,
+    gap: 20,
+    shadowColor: "#172033",
+    shadowOpacity: 0.05,
+    shadowRadius: 16,
+    shadowOffset: { width: 0, height: 5 },
+    elevation: 2,
+  },
+  fieldContainer: {
+    gap: 8,
+  },
+  fieldLabel: {
+    fontSize: 14,
+    fontFamily: fontFamily.semiBold,
+    color: colors.text.secundary,
+  },
+  input: {
+    minHeight: 52,
+    borderWidth: 1,
+    borderColor: colors.borderLight,
+    borderRadius: 14,
+    paddingHorizontal: 16,
+    color: colors.text.primary,
+    fontSize: 15,
+    fontFamily: fontFamily.regular,
+    backgroundColor: colors.white,
+    justifyContent: "center",
+  },
+  inputMultiline: {
+    minHeight: 104,
+    paddingTop: 14,
+    paddingBottom: 14,
+    textAlignVertical: "top",
+  },
+  selectTrigger: {
+    minHeight: 52,
+    borderWidth: 1,
+    borderColor: colors.borderLight,
+    borderRadius: 14,
+    paddingHorizontal: 16,
+    backgroundColor: colors.white,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  selectValue: {
+    fontSize: 15,
+    fontFamily: fontFamily.regular,
+    color: colors.text.primary,
+    flex: 1,
+  },
+  selectPlaceholder: {
+    fontSize: 15,
+    fontFamily: fontFamily.regular,
+    color: colors.text.muted,
+    flex: 1,
+  },
+  dateInputContainer: {
+    position: "relative",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  dateInput: {
+    flex: 1,
+    paddingRight: 44,
+  },
+  dateIconContainer: {
+    position: "absolute",
+    right: 14,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  priorityContainer: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  priorityButton: {
+    flex: 1,
+    minHeight: 44,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: colors.borderLight,
+    backgroundColor: colors.white,
+  },
+  priorityButtonActive: {
+    borderColor: colors.text.orangeDark,
+    backgroundColor: colors.background.badgeOrange,
+  },
+  priorityText: {
+    fontSize: 13,
+    fontFamily: fontFamily.medium,
+    color: colors.text.secundary,
+  },
+  priorityTextActive: {
+    fontFamily: fontFamily.semiBold,
+    color: colors.text.orangeDark,
+  },
+  buttonContainer: {
+    marginTop: 24,
+  },
+  // Modal styles for dropdown & date pickers
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.4)",
+    justifyContent: "flex-end",
+  },
+  modalContent: {
+    backgroundColor: colors.white,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    padding: 24,
+    maxHeight: "70%",
+  },
+  modalHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 16,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontFamily: fontFamily.bold,
+    color: colors.text.primary,
+  },
+  modalCloseText: {
+    fontSize: 14,
+    fontFamily: fontFamily.semiBold,
+    color: colors.primary,
+  },
+  disciplineItem: {
+    paddingVertical: 14,
+    paddingHorizontal: 12,
+    borderRadius: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    borderBottomColor: colors.borderLightTranslucent,
+  },
+  disciplineItemActive: {
+    backgroundColor: colors.background.blue,
+  },
+  disciplineText: {
+    fontSize: 15,
+    fontFamily: fontFamily.regular,
+    color: colors.text.primary,
+  },
+  disciplineTextActive: {
+    fontFamily: fontFamily.semiBold,
+    color: colors.primary,
+  },
+  quickDateContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+    marginTop: 12,
+  },
+  quickDateChip: {
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: colors.borderLight,
+    backgroundColor: colors.background.primary,
+  },
+  quickDateChipActive: {
+    borderColor: colors.primary,
+    backgroundColor: colors.background.blue,
+  },
+  quickDateChipText: {
+    fontSize: 13,
+    fontFamily: fontFamily.medium,
+    color: colors.text.secundary,
+  },
+  quickDateChipTextActive: {
+    fontFamily: fontFamily.semiBold,
+    color: colors.primary,
+  },
+})

@@ -7,7 +7,10 @@ export const colors = {
   text: {
     primary: "#191B23",
     secundary: "#434655",
+    secundaryTranslucent: "rgba(67, 70, 85, 0.5)",
     green: "#007432",
+    muted: "#6B7280",
+    orangeDark: "#943700",
   },
   background: {
     primary: "#FAF8FF",
@@ -15,7 +18,11 @@ export const colors = {
     red: "#FFDBCD",
     green: "#6BFF8F",
     blue: "#EDEDF9",
+    card: "#FFFFFF",
+    badgeOrange: "rgba(188, 72, 0, 0.1)",
   },
   border: "#C3C6D7",
+  borderLight: "#E1E2ED",
+  borderLightTranslucent: "rgba(225, 226, 237, 0.3)",
   info: "#2563EB",
 }

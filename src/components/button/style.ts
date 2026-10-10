@@ -11,6 +11,12 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 8,
   },
+  content: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+  },
   text: {
     color: colors.white,
     fontFamily: fontFamily.semiBold,

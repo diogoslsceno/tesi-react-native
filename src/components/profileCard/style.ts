@@ -34,7 +34,10 @@ export const styles = StyleSheet.create({
     color: colors.primary,
   },
   headerIcon: {
-    padding: 4,
+    width: 32,
+    height: 32,
+    alignItems: "center",
+    justifyContent: "center",
   },
   profile: {
     alignItems: "center",
