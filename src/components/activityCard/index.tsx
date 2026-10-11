@@ -1,5 +1,4 @@
 import { Button } from "@/components/button"
-import { styles } from "./style"
 import { colors } from "@/styles/colors"
 import { Feather, FontAwesome6, Ionicons } from "@expo/vector-icons"
 import { router } from "expo-router"
@@ -16,6 +15,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
+import { styles } from "./style"
 
 const MOCK_DISCIPLINES = ["Cálculo I", "Algoritmos", "Estrutura de Dados I"]
 
@@ -30,11 +30,7 @@ export function ActivityCard() {
   const [isDateModalOpen, setIsDateModalOpen] = useState(false)
 
   const handleGoBack = () => {
-    if (router.canGoBack()) {
-      router.back()
-    } else {
-      router.navigate("/(tabs)")
-    }
+    router.replace("/(tabs)/activity")
   }
 
   const handleSelectQuickDate = (daysToAdd: number) => {

@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   content: {
     paddingTop: Platform.OS === "android" ? 54 : 64,
     paddingHorizontal: 24,
-    paddingBottom: 40,
+    paddingBottom: Platform.OS === "ios" ? 100 : 84,
   },
   header: {
     position: "relative",
