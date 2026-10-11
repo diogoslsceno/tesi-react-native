@@ -1,6 +1,6 @@
-import { default as CardDiscipline } from "@/components/CardDiscipline";
-import DisciplineCard from "@/components/DisciplineCard";
+import CourseCard from "@/components/CourseCard";
 import { SummaryCard } from "@/components/SummaryCard";
+import TaskCard from "@/components/TaskCard";
 import { styles } from "@/screens/index-style";
 import { colors } from "@/styles/colors";
 import {
@@ -9,14 +9,17 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-
-export default function Index() {
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+const profilePhoto = require("../../../assets/images/profile-photo.png")                                                                    
+                                                                        export default function Index() {
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.content}>
-          <Text style={styles.label}>Minha Rotina</Text>
+          <View style={styles.headerLeft}>
+            <Image source={profilePhoto} style={styles.headerAvatar} />
+            <Text style={styles.headerTitle}>Minha Rotina</Text>
+          </View>
           <View style={styles.titleContent}>
             <Text style={styles.title}>Olá, Estudante!</Text>
             <Text style={styles.subtitle}>Organize sua rotina acadêmica</Text>
@@ -79,7 +82,7 @@ export default function Index() {
 
           <View style={styles.cardContent}>
             <View style={styles.card}>
-              <CardDiscipline
+              <TaskCard
                 alertTitle="Pendente"
                 dataTitle="Hoje, 23:59"
                 title="Trabalho Prático de SO"
@@ -92,7 +95,7 @@ export default function Index() {
 
           <View style={styles.headerContent}>
             <View style={styles.card}>
-              <CardDiscipline
+              <TaskCard
                 alertTitle="Em 3 dias"
                 dataTitle="25 out"
                 title="Lista de Exercícios 4"
@@ -109,7 +112,7 @@ export default function Index() {
 
           <View style={styles.headerContent}>
             <View style={styles.card}>
-              <DisciplineCard
+              <CourseCard
                 title="Engenharia de Software"
                 teacher="Prof. João Silva"
                 time="Segundas, 19:00 - 20:40"
@@ -140,16 +143,17 @@ export default function Index() {
                   <Ionicons
                     name="location-outline"
                     size={24}
-                    color={colors.text.segondary}
+                    color={colors.text.segondary
+                    }
                   />
                 }
               />
             </View>
           </View>
 
-          <View>
-            <View>
-              <DisciplineCard
+          <View style={styles.headerContent}>
+            <View style={styles.card}>
+              <CourseCard
                 title="Banco de Dados"
                 teacher="Profa. Marina Silva"
                 time="Ter, Qui 10:00 - 12:00"

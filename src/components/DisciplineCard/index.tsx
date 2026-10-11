@@ -7,33 +7,65 @@ type DisciplineCardProps = {
   time: string;
   room: string;
   borderColor: string;
-  icon: React.ReactNode;
-  timeIcon: React.ReactNode;
-  roomIcon: React.ReactNode;
-  teacherIcon: React.ReactNode;
+  pendings?: string;
+  icon?: React.ReactNode;
+  timeIcon?: React.ReactNode;
+  roomIcon?: React.ReactNode;
+  teacherIcon?: React.ReactNode;
 };
 
-export default function DisciplineCard({title, teacher, time, room, borderColor, icon, roomIcon, teacherIcon, timeIcon}: DisciplineCardProps) {
+export default function DisciplineCard({
+  title,
+  teacher,
+  time,
+  room,
+  borderColor,
+  pendings,
+  icon,
+  roomIcon,
+  teacherIcon,
+  timeIcon,
+}: DisciplineCardProps) {
   return (
     <View style={[styles.container, { borderLeftColor: borderColor }]}>
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
-        {icon}
+        {pendings ? (
+          <View style={styles.badge}>
+            <Text style={styles.badgeText}>{pendings}</Text>
+          </View>
+        ) : (
+          icon
+        )}
       </View>
 
-      <View style={styles.infoRow}>
+      <View style={styles.teacherRow}>
         {teacherIcon}
         <Text style={styles.infoText}>{teacher}</Text>
       </View>
 
-      <View style={styles.infoRow}>
-        {timeIcon}
-        <Text style={styles.infoText}>{time}</Text>
-      </View>
+      <View style={styles.divider} />
 
-      <View style={styles.infoRow}>
-        {roomIcon}
-        <Text style={styles.infoText}>{room}</Text>
+      <View style={styles.detailsContainer}>
+        <View style={styles.scheduleRow}>
+          <View style={styles.iconCircle}>
+            {timeIcon}
+          </View>
+          <View style={styles.textGroup}>
+            <Text style={styles.labelText}>Horário</Text>
+            <Text style={styles.valueText}>{time}</Text>
+          </View>
+        </View>
+
+        <View style={styles.roomRow}>
+          <View style={styles.iconCircle}>
+            {roomIcon}
+          </View>
+          <View style={styles.textGroup}>
+            <Text style={styles.labelText}>Sala</Text>
+            <Text style={styles.valueText}>{room}</Text>
+          </View>
+        </View>
       </View>
     </View>
   );
