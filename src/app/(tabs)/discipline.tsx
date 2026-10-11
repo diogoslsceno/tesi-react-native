@@ -1,11 +1,12 @@
 import CourseCard from "@/components/CourseCard";
-import { profilePhoto } from "@/components/profileCard/index";
 import SearchBar from "@/components/SearchBar";
 import { styles } from "@/components/SearchBar/style";
 import { colors } from "@/styles/colors";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { useState } from 'react';
 import { Image, Text, View } from "react-native";
+
+const profilePhoto = require("../../../assets/images/profile-photo.png");
 
 export default function Discipline() {
 

@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
 
     headerTitle: {                    
         fontSize: 21,                   
-        fontFamily: fontFamily.semibol,
+        fontFamily: fontFamily.semiBold,
         color: colors.primary,          
       },
 

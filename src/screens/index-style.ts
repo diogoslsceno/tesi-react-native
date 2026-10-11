@@ -12,6 +12,21 @@ export const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? 54 : 64,
     paddingHorizontal: 24,
   },
+  headerLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  headerAvatar: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+  },
+  headerTitle: {
+    fontSize: 21,
+    fontFamily: fontFamily.semiBold,
+    color: colors.primary,
+  },
   titleContent: {
     paddingTop: 28,
     marginBottom: 32,

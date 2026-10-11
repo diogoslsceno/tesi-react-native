@@ -65,10 +65,30 @@ export const styles = StyleSheet.create({
     marginVertical: 14,
   },
 
+  detailsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
   detailsRow: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+
+  scheduleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    flex: 1,
+  },
+
+  roomRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    flex: 1,
   },
 
   infoCol: {
