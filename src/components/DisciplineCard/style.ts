@@ -12,17 +12,6 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
   },
 
-  SearchContainer: {
-    backgroundColor: colors.background.gray,
-    borderRadius: 12,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    
-  },
-
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -71,12 +60,6 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
-  detailsRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-
   scheduleRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -89,13 +72,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
     flex: 1,
-  },
-
-  infoCol: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    flex: 1,
+    justifyContent: "flex-end",
   },
 
   iconCircle: {
@@ -115,7 +92,6 @@ export const styles = StyleSheet.create({
     fontSize: 10,
     fontFamily: fontFamily.regular,
     color: colors.text.secundary,
-    textTransform: "uppercase",
   },
 
   valueText: {
@@ -123,13 +99,6 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.medium || fontFamily.regular,
     color: colors.text.primary,
     marginTop: 2,
-  },
-
-  infoRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    marginTop: 8,
   },
 
   infoText: {
