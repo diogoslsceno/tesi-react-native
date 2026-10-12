@@ -7,7 +7,9 @@ type DisciplineCardProps = {
   time: string;
   room: string;
   borderColor: string;
-  pendings?: string;
+  pendings: string;
+  pendingsColor?: string;
+  badgeColor: string;
   icon?: React.ReactNode;
   timeIcon?: React.ReactNode;
   roomIcon?: React.ReactNode;
@@ -21,6 +23,8 @@ export default function DisciplineCard({
   room,
   borderColor,
   pendings,
+  pendingsColor,
+  badgeColor,
   icon,
   roomIcon,
   teacherIcon,
@@ -31,8 +35,8 @@ export default function DisciplineCard({
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
         {pendings ? (
-          <View style={styles.badge}>
-            <Text style={styles.badgeText}>{pendings}</Text>
+          <View style={[styles.badge, {backgroundColor: badgeColor}]}>
+            <Text style={[styles.badgeText, { color: pendingsColor }]}>{pendings}</Text>
           </View>
         ) : (
           icon

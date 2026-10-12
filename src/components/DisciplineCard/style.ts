@@ -6,7 +6,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    padding: 24,
+    paddingVertical: 20,
+    paddingHorizontal: 16,
     borderRadius: 12,
     borderLeftWidth: 6,
     marginBottom: 16,
@@ -38,7 +39,6 @@ export const styles = StyleSheet.create({
   badgeText: {
     fontSize: 12,
     fontFamily: fontFamily.semibold,
-    color: colors.red,
   },
 
   teacherRow: {
@@ -56,36 +56,42 @@ export const styles = StyleSheet.create({
 
   detailsContainer: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-between",
+    gap: 10,
   },
 
   scheduleRow: {
     flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    flex: 1,
+    alignItems: "flex-start",
+    gap: 8,
+    flex: 1.25,
+    minWidth: 0,
   },
 
   roomRow: {
     flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
+    alignItems: "flex-start",
+    gap: 8,
     flex: 1,
-    justifyContent: "flex-end",
+    minWidth: 0,
   },
 
   iconCircle: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     backgroundColor: colors.background.blue,
     alignItems: "center",
     justifyContent: "center",
+    flexShrink: 0,
+    marginTop: 2,
   },
 
   textGroup: {
     flexDirection: "column",
+    flex: 1,
+    minWidth: 0,
   },
 
   labelText: {
