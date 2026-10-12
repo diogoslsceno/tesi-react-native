@@ -1,24 +1,35 @@
-import CourseCard from "@/components/CourseCard";
-import { SummaryCard } from "@/components/SummaryCard";
-import TaskCard from "@/components/TaskCard";
-import { styles } from "@/screens/index-style";
-import { colors } from "@/styles/colors";
+import CourseCard from "@/components/CourseCard"
+import { SummaryCard } from "@/components/SummaryCard"
+import TaskCard from "@/components/TaskCard"
+import { styles } from "@/screens/index-style"
+import { colors } from "@/styles/colors"
 import {
   FontAwesome,
   FontAwesome6,
   Ionicons,
   MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-const profilePhoto = require("../../../assets/images/profile-photo.png")                                                                    
-                                                                        export default function Index() {
+} from "@expo/vector-icons"
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
+const profilePhoto = require("../../../assets/images/profile-photo.png")
+export default function Index() {
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.content}>
-          <View style={styles.headerLeft}>
-            <Image source={profilePhoto} style={styles.headerAvatar} />
-            <Text style={styles.headerTitle}>Minha Rotina</Text>
+          <View style={styles.header}>
+            <View style={styles.headerLeft}>
+              <Image source={profilePhoto} style={styles.headerAvatar} />
+              <Text style={styles.headerTitle}>Minha Rotina</Text>
+            </View>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.notificationButton}
+              accessibilityRole="button"
+              accessibilityLabel="Notificações"
+            >
+              <Ionicons name="notifications" size={22} color={colors.primary} />
+              <View style={styles.notificationBadge} />
+            </TouchableOpacity>
           </View>
           <View style={styles.titleContent}>
             <Text style={styles.title}>Olá, Estudante!</Text>
@@ -30,6 +41,7 @@ const profilePhoto = require("../../../assets/images/profile-photo.png")
             textColor={colors.orange.Primary}
             title="Pendências"
             subtitle="Para esta semana"
+            decorationColor={colors.background.orange}
             icon={
               <MaterialCommunityIcons
                 name="clipboard-alert"
@@ -44,8 +56,9 @@ const profilePhoto = require("../../../assets/images/profile-photo.png")
               <SummaryCard
                 total={2}
                 textColor={colors.red}
-                title="Prova"
-                subtitle="Próximo 15 dias"
+                title="Provas"
+                subtitle="Próximos 15 dias"
+                decorationColor={colors.background.red}
                 icon={
                   <FontAwesome6
                     name="clipboard-question"
@@ -60,11 +73,12 @@ const profilePhoto = require("../../../assets/images/profile-photo.png")
               <SummaryCard
                 total={5}
                 textColor={colors.primary}
-                title="Disciplina"
+                title="Disciplinas"
+                decorationColor={colors.background.blue}
                 subtitle="Ativas no semestre"
                 icon={
-                  <FontAwesome6
-                    name="graduation-cap"
+                  <MaterialCommunityIcons
+                    name="school"
                     size={24}
                     color={colors.primary}
                   />
@@ -143,8 +157,7 @@ const profilePhoto = require("../../../assets/images/profile-photo.png")
                   <Ionicons
                     name="location-outline"
                     size={24}
-                    color={colors.text.segondary
-                    }
+                    color={colors.text.segondary}
                   />
                 }
               />
@@ -160,11 +173,11 @@ const profilePhoto = require("../../../assets/images/profile-photo.png")
                 room="Lab 4, Bloco B"
                 borderColor={colors.green}
                 icon={
-                  <FontAwesome           
-                    name="server" 
-                    size={24}             
+                  <FontAwesome
+                    name="server"
+                    size={24}
                     color={colors.icon.gray}
-                  />                      
+                  />
                 }
                 teacherIcon={
                   <Ionicons
@@ -190,9 +203,8 @@ const profilePhoto = require("../../../assets/images/profile-photo.png")
               />
             </View>
           </View>
-
         </View>
       </View>
     </ScrollView>
-  );
+  )
 }

@@ -1,20 +1,20 @@
-import { Text, View } from "react-native";
-import { styles } from "./style";
+import { Text, View } from "react-native"
+import { styles } from "./style"
 
 type DisciplineCardProps = {
-  title: string;
-  teacher: string;
-  time: string;
-  room: string;
-  borderColor: string;
-  pendings: string;
-  pendingsColor?: string;
-  badgeColor: string;
-  icon?: React.ReactNode;
-  timeIcon?: React.ReactNode;
-  roomIcon?: React.ReactNode;
-  teacherIcon?: React.ReactNode;
-};
+  title: string
+  teacher: string
+  time: string
+  room: string
+  borderColor: string
+  pendings: string
+  pendingsColor?: string
+  badgeColor: string
+  icon?: React.ReactNode
+  timeIcon?: React.ReactNode
+  roomIcon?: React.ReactNode
+  teacherIcon?: React.ReactNode
+}
 
 export default function DisciplineCard({
   title,
@@ -35,8 +35,10 @@ export default function DisciplineCard({
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
         {pendings ? (
-          <View style={[styles.badge, {backgroundColor: badgeColor}]}>
-            <Text style={[styles.badgeText, { color: pendingsColor }]}>{pendings}</Text>
+          <View style={[styles.badge, { backgroundColor: badgeColor }]}>
+            <Text style={[styles.badgeText, { color: pendingsColor }]}>
+              {pendings}
+            </Text>
           </View>
         ) : (
           icon
@@ -52,9 +54,7 @@ export default function DisciplineCard({
 
       <View style={styles.detailsContainer}>
         <View style={styles.scheduleRow}>
-          <View style={styles.iconCircle}>
-            {timeIcon}
-          </View>
+          <View style={styles.iconCircle}>{timeIcon}</View>
           <View style={styles.textGroup}>
             <Text style={styles.labelText}>Horário</Text>
             <Text style={styles.valueText}>{time}</Text>
@@ -62,9 +62,7 @@ export default function DisciplineCard({
         </View>
 
         <View style={styles.roomRow}>
-          <View style={styles.iconCircle}>
-            {roomIcon}
-          </View>
+          <View style={styles.iconCircle}>{roomIcon}</View>
           <View style={styles.textGroup}>
             <Text style={styles.labelText}>Sala</Text>
             <Text style={styles.valueText}>{room}</Text>
@@ -72,5 +70,5 @@ export default function DisciplineCard({
         </View>
       </View>
     </View>
-  );
+  )
 }

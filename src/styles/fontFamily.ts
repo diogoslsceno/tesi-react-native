@@ -5,4 +5,4 @@ export const fontFamily = {
   semiBold: "Manrope_600SemiBold",
   semibold: "Manrope_600SemiBold",
   bold: "Manrope_700Bold",
-};
+}

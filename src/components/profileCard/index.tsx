@@ -1,7 +1,12 @@
-import { styles } from "./style"
 import { colors } from "@/styles/colors"
-import { AntDesign, Feather, FontAwesome6, Ionicons } from "@expo/vector-icons"
+import {
+  Feather,
+  FontAwesome6,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons"
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
+import { styles } from "./style"
 
 const profilePhoto = require("../../../assets/images/profile-photo.png")
 
@@ -42,8 +47,8 @@ export function ProfileCard() {
           </Text>
 
           <View style={styles.semester}>
-            <FontAwesome6
-              name="graduation-cap"
+            <MaterialCommunityIcons
+              name="school"
               size={14}
               color={colors.primary}
             />
@@ -63,7 +68,11 @@ export function ProfileCard() {
         <View style={styles.disciplineCard}>
           <View style={styles.disciplineDecoration} />
           <View style={styles.disciplineIcon}>
-            <AntDesign name="book" size={24} color={colors.white} />
+            <MaterialCommunityIcons
+              name="book"
+              size={24}
+              color={colors.white}
+            />
           </View>
           <View style={styles.disciplineInfo}>
             <Text style={styles.cardLabel}>Disciplinas Ativas</Text>

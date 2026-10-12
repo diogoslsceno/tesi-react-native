@@ -1,5 +1,10 @@
 import { ReactNode } from "react"
-import { Text, TouchableOpacity, TouchableOpacityProps, View } from "react-native"
+import {
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+} from "react-native"
 import { styles } from "./style"
 
 type ButtonProps = TouchableOpacityProps & {

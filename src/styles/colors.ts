@@ -15,6 +15,7 @@ export const colors = {
     green: "#007432",
     muted: "#6B7280",
     orangeDark: "#943700",
+    red: "#93000A",
   },
   background: {
     primary: "#FAF8FF",
@@ -40,11 +41,13 @@ export const colors = {
     completed: "#006E2F",
     completedBg: "#6BFF8F",
     completedText: "#007432",
+    translucentGreen: "#6BFF8F4C",
   },
   border: "#C3C6D7",
   borderLight: "#E1E2ED",
   borderLightTranslucent: "rgba(225, 226, 237, 0.3)",
   info: "#2563EB",
+  infoLight: "#B4C5FF",
   icon: {
     blue: "#2563EB",
     gray: "#737686",

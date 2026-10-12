@@ -12,6 +12,11 @@ export const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? 54 : 64,
     paddingHorizontal: 24,
   },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   headerLeft: {
     flexDirection: "row",
     alignItems: "center",
@@ -26,6 +31,24 @@ export const styles = StyleSheet.create({
     fontSize: 21,
     fontFamily: fontFamily.semiBold,
     color: colors.primary,
+  },
+  notificationButton: {
+    position: "relative",
+    width: 32,
+    height: 32,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  notificationBadge: {
+    position: "absolute",
+    top: 3,
+    right: 4,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: colors.red,
+    borderWidth: 1.5,
+    borderColor: colors.background.primary,
   },
   titleContent: {
     paddingTop: 28,

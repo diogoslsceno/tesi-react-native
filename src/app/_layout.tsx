@@ -1,4 +1,5 @@
 import { Loading } from "@/components/loading"
+import { ActivitiesProvider } from "@/contexts/ActivitiesContext"
 import {
   Manrope_300Light,
   Manrope_400Regular,
@@ -35,15 +36,17 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="index" />
-      <Stack.Screen name="(tabs)" />
-      <Stack.Screen name="new-activity" />
-    </Stack>
+    <ActivitiesProvider>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="new-activity" />
+        <Stack.Screen name="activity-details" />
+      </Stack>
+    </ActivitiesProvider>
   )
 }
-

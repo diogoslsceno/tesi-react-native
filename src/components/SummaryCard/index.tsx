@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Text, View } from "react-native"
+import { StyleProp, Text, View, ViewStyle } from "react-native"
 import { styles } from "./styles"
 
 type SummaryCardProps = {
@@ -8,6 +8,8 @@ type SummaryCardProps = {
   subtitle: string
   icon?: ReactNode
   textColor?: string
+  decorationColor?: string
+  style?: StyleProp<ViewStyle>
 }
 
 export function SummaryCard({
@@ -16,9 +18,23 @@ export function SummaryCard({
   subtitle,
   icon,
   textColor,
+  decorationColor,
+  style,
 }: SummaryCardProps) {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        decorationColor ? styles.decoratedCard : null,
+        style,
+      ]}
+    >
+      {decorationColor != null && (
+        <View
+          style={[styles.decoration, { backgroundColor: decorationColor }]}
+        />
+      )}
+
       {(icon != null || total != null) && (
         <View style={styles.row}>
           {icon}

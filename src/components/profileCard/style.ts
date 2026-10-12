@@ -220,7 +220,7 @@ export const styles = StyleSheet.create({
     opacity: 0.5,
   },
   greenDecoration: {
-    backgroundColor: "#6BFF8F",
+    backgroundColor: "#6BFF8F4C",
   },
   redDecoration: {
     backgroundColor: colors.background.red,

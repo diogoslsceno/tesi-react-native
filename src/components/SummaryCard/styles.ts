@@ -10,12 +10,32 @@ export const styles = StyleSheet.create({
     paddingStart: 24,
     paddingBottom: 24,
     paddingEnd: 16,
-    borderRadius: 12,
+    borderRadius: 16,
+    position: "relative",
+    overflow: "hidden",
+  },
+  decoratedCard: {
+    flex: 1,
+    height: 147,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    justifyContent: "space-between",
+  },
+  decoration: {
+    position: "absolute",
+    top: -20,
+    right: -20,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    opacity: 0.5,
+    zIndex: 0,
   },
   row: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
+    zIndex: 1,
   },
   textRow: {
     fontFamily: fontFamily.semiBold,
@@ -24,6 +44,7 @@ export const styles = StyleSheet.create({
   },
   content: {
     paddingTop: 12,
+    zIndex: 1,
   },
   titleContent: {
     color: colors.text.primary,

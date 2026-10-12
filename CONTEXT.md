@@ -9,7 +9,7 @@
 Aplicativo mobile acadêmico desenvolvido em **React Native + Expo + TypeScript** com **Expo Router** para navegação. O objetivo é permitir que estudantes organizem disciplinas, atividades e prazos de forma visual e intuitiva.
 
 - **Stack:** React Native 0.86.3 · Expo SDK 57 · TypeScript 6 · Expo Router 57
-- **Pacote gestor:** Bun (`bun.lock` presente) — usar `bunx` para comandos de CLI
+- **Pacote gestor:** npm (`package-lock.json` presente)
 - **Fontes:** Manrope (300–700) via `@expo-google-fonts/manrope`
 - **Ícones:** `@expo/vector-icons` (AntDesign, Feather, FontAwesome6, Ionicons, MaterialCommunityIcons, MaterialIcons)
 
@@ -21,32 +21,38 @@ Aplicativo mobile acadêmico desenvolvido em **React Native + Expo + TypeScript*
 rotina-academica/
 ├── assets/
 │   └── images/
-│       ├── profile-photo.png        # Foto de perfil usada no cabeçalho
-│       └── activitiesList.png       # Referência visual da tela Atividades
+│       ├── profile-photo.png        # Foto de perfil usada nos cabeçalhos
+│       ├── inicio.png               # Referência visual da tela Início
+│       ├── activitiesList.png       # Referência visual da tela Atividades
+│       └── detalhesTela.png         # Referência visual da tela Detalhes da Atividade
 │
 ├── src/
 │   ├── app/
-│   │   ├── _layout.tsx              # Root Stack — carrega fontes e registra rotas
+│   │   ├── _layout.tsx              # Root Stack — carrega fontes e engloba ActivitiesProvider
 │   │   ├── index.tsx                # Redirect para /(tabs)
 │   │   ├── new-activity.tsx         # Redirect para /(tabs)/activity?form=true
+│   │   ├── activity-details.tsx     # Rota da tela de Detalhes da Atividade
 │   │   └── (tabs)/
 │   │       ├── _layout.tsx          # Navegador de abas com 4 telas
 │   │       ├── index.tsx            # Tela Início
 │   │       ├── discipline.tsx       # Tela Disciplinas
-│   │       ├── activity.tsx         # Tela Atividades e Prazos / Nova Atividade
+│   │       ├── activity.tsx         # Tela Atividades e Prazos / Nova Atividade / Edição
 │   │       └── profile.tsx          # Tela Perfil
 │   │
 │   ├── components/
 │   │   ├── activitiesList/          # ⭐ Listagem "Atividades e Prazos"
 │   │   │   ├── index.tsx
 │   │   │   └── style.ts
-│   │   ├── activityCard/            # Formulário "Nova Atividade"
+│   │   ├── activityCard/            # Formulário "Nova Atividade" / "Editar Atividade"
+│   │   │   ├── index.tsx
+│   │   │   └── style.ts
+│   │   ├── activityDetails/         # ⭐ Tela completa "Detalhes da Atividade"
 │   │   │   ├── index.tsx
 │   │   │   └── style.ts
 │   │   ├── profileCard/             # Card completo da tela Perfil
 │   │   │   ├── index.tsx
 │   │   │   └── style.ts
-│   │   ├── DisciplineCard/          # Card de disciplina (tela Início e Disciplinas)
+│   │   ├── DisciplineCard/          # Card de disciplina expandido
 │   │   │   ├── index.tsx
 │   │   │   └── style.ts
 │   │   ├── CardDiscipline/          # Card simplificado de disciplina (legado)
@@ -58,7 +64,7 @@ rotina-academica/
 │   │   ├── TaskCard/                # Card de tarefa resumido (tela Início)
 │   │   │   ├── index.tsx
 │   │   │   └── style.ts
-│   │   ├── SummaryCard/             # Card de resumo numérico (tela Início)
+│   │   ├── SummaryCard/             # Card de resumo numérico (Início: Pendências, Provas, Disciplinas)
 │   │   │   ├── index.tsx
 │   │   │   └── styles.ts
 │   │   ├── SearchBar/               # Barra de pesquisa (tela Disciplinas)
@@ -67,8 +73,11 @@ rotina-academica/
 │   │   ├── button/                  # Botão primário reutilizável
 │   │   │   ├── index.tsx
 │   │   │   └── style.ts
-│   │   └── loading/                 # Spinner de carregamento
+│   │   └── loading/                 # Spinner de carregamento de fontes
 │   │       └── index.tsx
+│   │
+│   ├── contexts/
+│   │   └── ActivitiesContext.tsx    # Contexto global gerenciador do estado das atividades
 │   │
 │   ├── screens/
 │   │   └── index-style.ts           # Estilos da tela Início
@@ -84,43 +93,32 @@ rotina-academica/
 ## Roteamento (Expo Router)
 
 ### Root Stack — `src/app/_layout.tsx`
-Carrega as fontes Manrope e declara o Stack raiz:
+Carrega as fontes Manrope, engloba a árvore no `ActivitiesProvider` e declara o Stack raiz:
 
-| Rota            | Destino                                         |
-|-----------------|-------------------------------------------------|
-| `index`         | Redirect para `/(tabs)`                        |
-| `(tabs)`        | Navegador de abas                               |
-| `new-activity`  | Redirect para `/(tabs)/activity?form=true`     |
+| Rota               | Destino                                                      |
+|--------------------|--------------------------------------------------------------|
+| `index`            | Redirect para `/(tabs)`                                     |
+| `(tabs)`           | Navegador de abas                                            |
+| `new-activity`     | Redirect para `/(tabs)/activity?form=true`                  |
+| `activity-details` | Tela de consulta e ações de Detalhes da Atividade selecionada|
 
 ### Abas — `src/app/(tabs)/_layout.tsx`
 4 abas com barra de navegação inferior:
 
-| Aba         | Arquivo            | Ícone                          |
-|-------------|--------------------|---------------------------------|
-| Início      | `index.tsx`        | `Ionicons / home-outline`       |
-| Disciplinas | `discipline.tsx`   | `AntDesign / book`              |
-| Atividades  | `activity.tsx`     | `MaterialCommunityIcons / clipboard-text-outline` |
-| Perfil      | `profile.tsx`      | `MaterialIcons / person-outline` |
+| Aba         | Arquivo            | Ícone                                            |
+|-------------|--------------------|--------------------------------------------------|
+| Início      | `index.tsx`        | `Ionicons / home-outline`                        |
+| Disciplinas | `discipline.tsx`   | `AntDesign / book`                               |
+| Atividades  | `activity.tsx`     | `MaterialCommunityIcons / clipboard-text-outline`|
+| Perfil      | `profile.tsx`      | `MaterialIcons / person-outline`                 |
 
 ### Tela Atividades — `src/app/(tabs)/activity.tsx`
-Renderiza dois componentes distintos com base em parâmetros de URL:
+Alterna entre visualizações com base em parâmetros de rota:
 
 ```ts
-// ?form=true ou ?form=new ou ?mode=new  → exibe ActivityCard (formulário)
-// sem parâmetros                         → exibe ActivitiesList (listagem)
+// ?form=true || ?form=new || ?mode=new || ?mode=edit → exibe ActivityCard (formulário)
+// sem parâmetros                                      → exibe ActivitiesList (listagem)
 ```
-
-> **Navegação do botão "+" (listagem → formulário):**
-> ```ts
-> router.push("/(tabs)/activity?form=true")
-> ```
->
-> **Navegação do botão Voltar (formulário → listagem):**
-> ```ts
-> router.replace("/(tabs)/activity")
-> // router.replace remove ?form=true do histórico,
-> // garantindo retorno à listagem, não à tela anterior.
-> ```
 
 ---
 
@@ -130,9 +128,10 @@ Renderiza dois componentes distintos com base em parâmetros de URL:
 
 ```ts
 colors.primary           // #004AC6  — Azul principal
-colors.info              // #2563EB  — Azul dos filtros ativos
-colors.red               // #BA1A1A  — Vermelho
-colors.green             // #006E2F  — Verde
+colors.info              // #2563EB  — Azul de destaque / botões de ação
+colors.infoLight         // #B4C5FF  — Azul claro (ícone dica de estudo)
+colors.red               // #BA1A1A  — Vermelho para alertas e prazos
+colors.green             // #006E2F  — Verde para ações concluídas
 colors.white             // #FFFFFF
 colors.border            // #C3C6D7
 colors.borderLight       // #E1E2ED
@@ -146,34 +145,24 @@ colors.text.secundary    // #434655  (alias: segondary)
 colors.text.muted        // #6B7280
 colors.text.green        // #007432
 colors.text.orangeDark   // #943700
+colors.text.red          // #93000A  (texto alta prioridade)
 colors.text.darkRed      // #93000A
-colors.text.secundaryTranslucent      // rgba(67,70,85,0.5)
-colors.text.secundaryOpacity30        // rgba(67,70,85,0.3)
 
-colors.background.primary    // #FAF8FF — Fundo geral
-colors.background.card       // #FFFFFF
-colors.background.gray       // #E7E7F3
-colors.background.blue       // #EDEDF9
-colors.background.red        // #FFDBCD
+colors.background.primary          // #FAF8FF — Fundo geral da aplicação
+colors.background.card             // #FFFFFF
+colors.background.gray             // #E7E7F3
+colors.background.blue             // #EDEDF9 — Decoração translúcida Disciplinas
+colors.background.red              // #FFDBCD — Decoração translúcida Provas
 colors.background.badgeRedLight    // #FFDAD6
 colors.background.badgeOrangeLight // #FFEDE6
-colors.background.green      // #6BFF8F
-colors.background.badgeOrange      // rgba(188,72,0,0.1)
-colors.background.dashedAdd        // rgba(243,243,254,0.5)
+colors.background.green            // #6BFF8F
 
-colors.status.urgent         // #BA1A1A  — Faixa/badge urgente
+colors.status.urgent         // #BA1A1A
 colors.status.urgentBg       // #FFDAD6
 colors.status.urgentText     // #93000A
-colors.status.next           // #BC4800  — Faixa próxima
-colors.status.nextBg         // #BC4800
-colors.status.nextText       // #FFFFFF
-colors.status.nextDark       // #943700
-colors.status.completed      // #006E2F  — Faixa concluída
+colors.status.completed      // #006E2F
 colors.status.completedBg    // #6BFF8F
 colors.status.completedText  // #007432
-
-colors.icon.blue             // #2563EB
-colors.icon.gray             // #737686
 ```
 
 ### `src/styles/fontFamily.ts`
@@ -186,200 +175,80 @@ fontFamily.semiBold  // Manrope_600SemiBold  (alias: semibold)
 fontFamily.bold      // Manrope_700Bold
 ```
 
-> ⚠️ Existe o typo `fontFamily.semibol` em `SearchBar/style.ts` — não replicar em novos arquivos.
-
-### `src/styles/textSize.ts`
-
-```ts
-textSize.title.primary    // 28
-textSize.title.secundary  // 22
-textSize.title.segundary  // 18
-textSize.label            // 22
-textSize.button           // 18
-textSize.subtitle.primary    // 16
-textSize.subtitle.secundary  // 12
-textSize.dashboard.title     // 16
-textSize.dashboard.subtitle  // 14
-```
-
 ---
 
-## Componentes
+## Componentes Principais
 
 ### `ActivitiesList` — `src/components/activitiesList/`
 Tela principal de "Atividades e Prazos".
+- **Resumo vs Descrição:** Exibe `activity.summary` abaixo do título (com fallback para `activity.description`), preservando textos compactos nos cartões.
+- **Filtros Funcionais:** Todas · Pendentes · Em andamento · Concluídas.
+- **Navegação para Detalhes:** O botão "Ver detalhes" navega para `/activity-details?id=${activity.id}`.
+- **Botão "+":** Abre o formulário via `router.push("/(tabs)/activity?form=true")`.
 
-**Responsabilidades:**
-- Cabeçalho com avatar, "Minha Rotina" e ícone de notificações
-- Título e subtítulo da tela
-- Filtros horizontais com scroll: Todas · Pendentes · Em andamento · Concluídas
-- Lista de cartões de atividades com:
-  - Faixa colorida lateral (status)
-  - Badge de status com ícone
-  - Prazo no canto superior direito
-  - Título, descrição e divisor
-  - Disciplina com ícone + ação ("Ver detalhes" / "Entregue")
-- Área com borda tracejada e botão "+" circular azul
-- Estado vazio por filtro
-
-**Tipos exportados:**
-```ts
-ActivityFilterType  // "Todas" | "Pendentes" | "Em andamento" | "Concluídas"
-ActivityStatusType  // "urgente" | "proxima" | "concluida"
-ActivityItem        // interface completa do item de atividade
-```
-
-**Dados:** Temporários (mock) — sem persistência ainda. A integração com estado compartilhado está pendente.
-
-**Navegação do botão "+":**
-```ts
-router.push("/(tabs)/activity?form=true")
-```
-
----
+### `ActivityDetails` — `src/components/activityDetails/`
+Tela completa de "Detalhes da Atividade", fiel ao mockup `detalhesTela.png`.
+- **Cabeçalho:** Botão de voltar, título "Detalhes" centralizado e menu de opções (três pontos).
+- **Badges:** Cápsulas de status (*Pendente* / *Concluída*) e prioridade (*! Alta Prioridade*).
+- **Cards de Disciplina e Entrega:** Lado a lado com ícones temáticos e destaque de data em vermelho.
+- **Card "Dica de Estudo":** Fundo azul (`#2563EB`) com ícone de lâmpada em `#B4C5FF`.
+- **Card "Descrição da Tarefa":** Exibe `activity.description` na íntegra, respeitando quebras de linha e estrutura acadêmica.
+- **Ações Fixas Inferiores:** Barra fixa com os botões "MARCAR COMO CONCLUÍDA" (alterna status) e "EDITAR ATIVIDADE" (abre formulário pré-preenchido).
+- **Menu de Opções:** Modal nativo para edição rápida, alternância de conclusão ou exclusão segura com confirmação.
 
 ### `ActivityCard` — `src/components/activityCard/`
-Formulário de criação de atividade ("Nova Atividade").
-
-**Campos:**
-- Título (TextInput)
-- Disciplina (Modal com FlatList)
-- Data de entrega (TextInput + Modal com seleção rápida)
-- Prioridade (Baixa / Média / Alta)
-- Observações (TextInput multiline)
-- Botão "Salvar atividade"
-
-**Disciplinas mock:** `["Cálculo I", "Algoritmos", "Estrutura de Dados I"]`
-
-**Navegação de retorno (botão ←):**
-```ts
-router.replace("/(tabs)/activity")
-// replace garante que ?form=true seja removido do histórico
-```
-
----
-
-### `ProfileCard` — `src/components/profileCard/`
-Tela completa de Perfil com avatar, dados do estudante, estatísticas e botão de configurações.
-
----
-
-### `DisciplineCard` — `src/components/DisciplineCard/`
-Card de disciplina expandido usado na tela de Disciplinas e na tela Início.
-
-Props: `title`, `teacher`, `time`, `room`, `borderColor`, `pendings`, `teacherIcon`, `timeIcon`, `roomIcon`
-
----
-
-### `CardDiscipline` — `src/components/CardDiscipline/`
-Card simplificado/legado com badge de status e data. Ainda em uso na tela Início em versões anteriores. Props: `title`, `subTitle`, `dataTitle`, `alertTitle`, `textColor`, `colorBackgroud`.
-
----
-
-### `TaskCard` — `src/components/TaskCard/`
-Card compacto de tarefa usado na tela Início (seção "Próximas atividades").
-
-Props: `title`, `subTitle`, `dataTitle`, `alertTitle`, `textColor`, `colorBackgroud`
-
----
-
-### `CourseCard` — `src/components/CourseCard/`
-Card de curso/disciplina com destaque visual. Usado na tela Início.
-
----
+Formulário dinâmico para criação e edição de atividades.
+- **Modos:** Suporta criação de nova atividade e edição de atividade existente quando recebe o parâmetro `id`.
+- **Navegação de Retorno Confiável:**
+  - Na criação: botão de voltar e salvamento executam `router.replace("/(tabs)/activity")`, garantindo retorno à listagem sem desempilhar para "Início".
+  - Na edição: botão de voltar e salvamento executam `router.replace({ pathname: "/activity-details", params: { id } })`, retornando diretamente para a tela de detalhes da atividade atualizada.
 
 ### `SummaryCard` — `src/components/SummaryCard/`
-Card de resumo numérico (pendências, provas, disciplinas) com ícone, total e subtítulo.
+Cards numéricos da tela Início.
+- **Decoração Circular:** Suporta a prop `decorationColor`, renderizando um círculo translúcido suave no canto superior direito (`top: -20, right: -20, width: 80, height: 80`), posicionado atrás do conteúdo (`zIndex: 0`).
+- **Simetria e Altura Uniforme:** Quando decorado, adota `height: 147` e `justifyContent: "space-between"` (baseado no `statCard` do Perfil), garantindo alturas rigorosamente idênticas entre "Provas" e "Disciplinas".
+- **Isolamento de "Pendências":** O cartão "Pendências" mantém suas dimensões e visual originais sem decoração.
 
-Props: `total`, `title`, `subtitle`, `icon`, `textColor`
-
----
-
-### `SearchBar` — `src/components/SearchBar/`
-Barra de pesquisa com ícone à esquerda. Usada na tela de Disciplinas.
-
-Props: `value`, `placeholder`, `onChangeText`
-
-> ⚠️ `SearchBar/style.ts` contém estilos de layout de tela (header, screenContainer, etc.) além dos estilos próprios da barra. Isso é um debt técnico — não replicar em novos componentes.
+### Cabeçalho da Tela Início — `src/app/(tabs)/index.tsx`
+- Cabeçalho alinhado com `justifyContent: "space-between"`.
+- À direita: botão com sino azul (`Ionicons name="notifications"`) e indicador circular vermelho de notificação pendente (`notificationBadge`).
 
 ---
 
-### `Button` — `src/components/button/`
-Botão primário com cor de fundo configurável e suporte a ícone.
+## Estado Global e Persistência
 
-Props: `text`, `color`, `icon`, + todas as `TouchableOpacityProps`
-
----
-
-### `Loading` — `src/components/loading/`
-Spinner simples exibido durante o carregamento de fontes.
-
----
-
-## Estado e Persistência
-
-> **Não há camada de estado global** (Context, Redux, Zustand, etc.) implementada ainda.
-
-- Os dados de atividades em `ActivitiesList` são **mock temporários** (`INITIAL_ACTIVITIES`).
-- O formulário `ActivityCard` salva apenas com `Alert` — sem persistência real.
-- A integração entre formulário e listagem (dados reais) é uma **funcionalidade pendente**.
+Camada de contexto centralizada em `src/contexts/ActivitiesContext.tsx`:
+- Provedor: `ActivitiesProvider` (envolve a aplicação no `RootLayout`).
+- Hook: `useActivities()`.
+- **Métodos disponíveis:**
+  - `activities`: Lista completa reativa de atividades.
+  - `completeActivity(id)`: Marca uma atividade como concluída.
+  - `toggleCompleteActivity(id)`: Alterna entre pendente e concluída, atualizando categorias e badges.
+  - `updateActivity(id, updated)`: Atualiza campos específicos da atividade (edição).
+  - `addActivity(newActivity)`: Cadastra nova atividade com ID único.
+  - `deleteActivity(id)`: Remove atividade da lista.
+  - `getActivityById(id)`: Recupera a atividade correspondente por ID.
 
 ---
 
-## Telas Pendentes / Próximas Etapas
+## Status das Telas
 
-| Tela                     | Status         | Observação                                              |
-|--------------------------|----------------|---------------------------------------------------------|
-| Início                   | ✅ Implementada | Dados mock                                              |
-| Disciplinas              | 🔨 Em progresso | SearchBar integrada, cards em desenvolvimento           |
-| Atividades e Prazos      | ✅ Implementada | Filtros funcionais, dados mock                          |
-| Nova Atividade           | ✅ Implementada | Sem persistência real                                   |
-| Perfil                   | ✅ Implementada | Dados mock                                              |
-| Detalhes da Atividade    | ❌ Pendente     | Botão "Ver detalhes" exibe Alert por ora               |
-| Estado global de dados   | ❌ Pendente     | Atividades não persistem entre formulário e listagem    |
-
----
-
-## Comandos Úteis
-
-```bash
-# Iniciar servidor de desenvolvimento
-npx expo start
-
-# Verificar tipagem TypeScript
-npx tsc --noEmit
-
-# Verificar saúde das dependências
-npx expo-doctor
-
-# Corrigir versões incompatíveis de pacotes
-npx expo install --fix
-
-# Instalar pacote com versão compatível com o SDK
-npx expo install <pacote>
-```
-
----
-
-## Histórico de Branches
-
-| Branch              | Conteúdo                                                    |
-|---------------------|-------------------------------------------------------------|
-| `main`              | Branch principal — estado atual do projeto                  |
-| `tela-incial`       | Primeira versão da tela inicial e layout de abas            |
-| `Tela-incial-2.0`   | CourseCard, TaskCard, SearchBar e refinamentos de disciplina|
-| `perfilPreliminar`  | Modularização de ProfileCard e ActivityCard                 |
+| Tela                     | Status         | Observação                                                  |
+|--------------------------|----------------|-------------------------------------------------------------|
+| Início                   | ✅ Implementada | Cabeçalho com sino, cards simétricos com círculos decorativos|
+| Disciplinas              | ✅ Implementada | SearchBar integrada, cards refinados                        |
+| Atividades e Prazos      | ✅ Implementada | Filtros funcionais, exibe `summary` das atividades          |
+| Nova Atividade / Edição  | ✅ Implementada | Integrada ao `ActivitiesContext` e navegação corrigida      |
+| Perfil                   | ✅ Implementada | Foto, dados do estudante e estatísticas                     |
+| Detalhes da Atividade    | ✅ Implementada | Fiel a `detalhesTela.png`, exibe `description` completa     |
+| Estado global de dados   | ✅ Implementado | `ActivitiesContext` ativo no `RootLayout`                   |
 
 ---
 
 ## Decisões Arquiteturais Relevantes
 
-1. **Formulário dentro das abas**: `ActivityCard` é renderizado dentro de `/(tabs)/activity?form=true` para preservar a barra de navegação inferior. Não usa rota Stack separada.
-
-2. **`router.replace` no retorno do formulário**: Garante que o parâmetro `?form=true` seja removido do histórico e o usuário sempre retorne à listagem — não à tela anterior no histórico.
-
-3. **Paleta centralizada**: Toda cor deve vir de `src/styles/colors.ts`. Nunca usar hex direto nos componentes.
-
-4. **Sem `ios/` ou `android/`**: Projeto usa Continuous Native Generation. Configurações nativas vão em `app.json` e config plugins.
-
-5. **`fontFamily.semibold` vs `fontFamily.semiBold`**: Ambos existem em `fontFamily.ts` e apontam para o mesmo valor. Prefer `semiBold` em novos arquivos.
+1. **Separação de Resumo e Descrição:** `activity.summary` é utilizado nos cartões da listagem para manter o layout limpo e conciso, enquanto `activity.description` armazena o conteúdo detalhado exibido exclusivamente na tela de Detalhes.
+2. **`router.replace` na navegação do formulário:** Substitui o estado atual na pilha de navegação ao voltar ou salvar, prevenindo desempilhamento incorreto para a aba "Início".
+3. **Composição em `SummaryCard`:** Decorações visuais são ativadas via prop opcional sem quebrar a flexibilidade do componente para uso simples (como no cartão de Pendências).
+4. **Sem código nativo manual:** Gerenciamento nativo exclusivo via Expo CNG (`app.json`).
+5. **Paleta Centralizada:** Consumo estrito dos tokens de `src/styles/colors.ts`.

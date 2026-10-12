@@ -1,8 +1,10 @@
+import { ActivityPriorityType } from "@/components/activitiesList"
 import { Button } from "@/components/button"
+import { useActivities } from "@/contexts/ActivitiesContext"
 import { colors } from "@/styles/colors"
 import { Feather, FontAwesome6, Ionicons } from "@expo/vector-icons"
-import { router } from "expo-router"
-import { useState } from "react"
+import { router, useLocalSearchParams } from "expo-router"
+import { useEffect, useState } from "react"
 import {
   Alert,
   FlatList,
@@ -17,9 +19,23 @@ import {
 } from "react-native"
 import { styles } from "./style"
 
-const MOCK_DISCIPLINES = ["Cálculo I", "Algoritmos", "Estrutura de Dados I"]
+const MOCK_DISCIPLINES = [
+  "Metodologia Científica",
+  "Filosofia",
+  "Estatística",
+  "Desenvolvimento App",
+  "Cálculo I",
+  "Algoritmos",
+  "Estrutura de Dados I",
+]
 
 export function ActivityCard() {
+  const { id } = useLocalSearchParams<{ id?: string; mode?: string }>()
+  const { getActivityById, updateActivity, addActivity } = useActivities()
+
+  const existingActivity = id ? getActivityById(id) : undefined
+  const isEditing = Boolean(id && existingActivity)
+
   const [title, setTitle] = useState("")
   const [selectedDiscipline, setSelectedDiscipline] = useState("")
   const [deliveryDate, setDeliveryDate] = useState("")
@@ -29,8 +45,22 @@ export function ActivityCard() {
   const [isDisciplineModalOpen, setIsDisciplineModalOpen] = useState(false)
   const [isDateModalOpen, setIsDateModalOpen] = useState(false)
 
+  useEffect(() => {
+    if (existingActivity) {
+      setTitle(existingActivity.title)
+      setSelectedDiscipline(existingActivity.discipline)
+      setDeliveryDate(existingActivity.deadline)
+      setSelectedPriority(existingActivity.priority || "Média")
+      setObservations(existingActivity.description || "")
+    }
+  }, [existingActivity])
+
   const handleGoBack = () => {
-    router.replace("/(tabs)/activity")
+    if (isEditing && id) {
+      router.replace({ pathname: "/activity-details", params: { id } })
+    } else {
+      router.replace("/(tabs)/activity")
+    }
   }
 
   const handleSelectQuickDate = (daysToAdd: number) => {
@@ -59,9 +89,59 @@ export function ActivityCard() {
       return
     }
 
+    if (isEditing && id) {
+      updateActivity(id, {
+        title: title.trim(),
+        discipline: selectedDiscipline,
+        deadline: deliveryDate.trim() || "Em breve",
+        priority: selectedPriority as ActivityPriorityType,
+        description: observations.trim(),
+      })
+
+      Alert.alert(
+        "Atividade Atualizada!",
+        `A atividade "${title}" foi atualizada com sucesso.`,
+        [
+          {
+            text: "OK",
+            onPress: () => {
+              router.replace({ pathname: "/activity-details", params: { id } })
+            },
+          },
+        ]
+      )
+      return
+    }
+
+    const isUrgent = selectedPriority === "Alta"
+    addActivity({
+      title: title.trim(),
+      summary: observations.trim() || undefined,
+      discipline: selectedDiscipline,
+      deadline: deliveryDate.trim() || "Em breve",
+      disciplineIconName: "book",
+      statusType: isUrgent ? "urgente" : "proxima",
+      statusLabel: isUrgent ? "Urgente" : "Próxima",
+      categories: ["Pendentes"],
+      isCompleted: false,
+      actionText: "Ver detalhes",
+      priority: selectedPriority as ActivityPriorityType,
+      description: observations.trim(),
+      studyTip:
+        "Mantenha o foco e organize seu tempo para concluir esta atividade com êxito.",
+    })
+
     Alert.alert(
       "Atividade Salva!",
-      `A atividade "${title}" para a disciplina "${selectedDiscipline}" foi registrada com sucesso.`
+      `A atividade "${title}" para a disciplina "${selectedDiscipline}" foi registrada com sucesso.`,
+      [
+        {
+          text: "OK",
+          onPress: () => {
+            router.replace("/(tabs)/activity")
+          },
+        },
+      ]
     )
   }
 
@@ -97,7 +177,9 @@ export function ActivityCard() {
         </View>
 
         <View style={styles.screenTitleContainer}>
-          <Text style={styles.screenTitle}>Nova atividade</Text>
+          <Text style={styles.screenTitle}>
+            {isEditing ? "Editar atividade" : "Nova atividade"}
+          </Text>
         </View>
 
         <View style={styles.card}>
@@ -211,7 +293,7 @@ export function ActivityCard() {
 
         <View style={styles.buttonContainer}>
           <Button
-            text="Salvar atividade"
+            text={isEditing ? "Salvar alterações" : "Salvar atividade"}
             color={colors.primary}
             icon={
               <FontAwesome6 name="floppy-disk" size={18} color={colors.white} />

@@ -1,3 +1,4 @@
+import { useActivities } from "@/contexts/ActivitiesContext"
 import { colors } from "@/styles/colors"
 import {
   AntDesign,
@@ -7,14 +8,7 @@ import {
 } from "@expo/vector-icons"
 import { router } from "expo-router"
 import { useState } from "react"
-import {
-  Alert,
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native"
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { styles } from "./style"
 
 const profilePhoto = require("../../../assets/images/profile-photo.png")
@@ -24,9 +18,12 @@ export type ActivityFilterType =
 
 export type ActivityStatusType = "urgente" | "proxima" | "concluida"
 
+export type ActivityPriorityType = "Baixa" | "Média" | "Alta"
+
 export interface ActivityItem {
   id: string
   title: string
+  summary?: string
   description: string
   deadline: string
   discipline: string
@@ -36,52 +33,9 @@ export interface ActivityItem {
   categories: ("Pendentes" | "Em andamento" | "Concluídas")[]
   isCompleted?: boolean
   actionText?: string
+  priority?: ActivityPriorityType
+  studyTip?: string
 }
-
-const INITIAL_ACTIVITIES: ActivityItem[] = [
-  {
-    id: "1",
-    title: "Seminário de ética",
-    description:
-      "Preparar slides e roteiro para a apresentação final da disciplina de Ética Profissional.",
-    deadline: "Hoje, 23:59",
-    discipline: "Filosofia",
-    disciplineIconName: "book",
-    statusType: "urgente",
-    statusLabel: "Urgente",
-    categories: ["Pendentes"],
-    isCompleted: false,
-    actionText: "Ver detalhes",
-  },
-  {
-    id: "2",
-    title: "Exercícios de probabilidade",
-    description:
-      "Lista 4 - Distribuição Normal e Teorema do Limite Central. Entregar em PDF.",
-    deadline: "Amanhã, 10:00",
-    discipline: "Estatística",
-    disciplineIconName: "grid",
-    statusType: "proxima",
-    statusLabel: "Próxima",
-    categories: ["Pendentes", "Em andamento"],
-    isCompleted: false,
-    actionText: "Ver detalhes",
-  },
-  {
-    id: "3",
-    title: "Projeto mobile",
-    description:
-      "Implementação da interface principal e integração com API REST.",
-    deadline: "Ontem",
-    discipline: "Desenvolvimento App",
-    disciplineIconName: "code",
-    statusType: "concluida",
-    statusLabel: "Concluída",
-    categories: ["Concluídas"],
-    isCompleted: true,
-    actionText: "Entregue",
-  },
-]
 
 const FILTERS: ActivityFilterType[] = [
   "Todas",
@@ -93,7 +47,7 @@ const FILTERS: ActivityFilterType[] = [
 export function ActivitiesList() {
   const [selectedFilter, setSelectedFilter] =
     useState<ActivityFilterType>("Todas")
-  const [activities] = useState<ActivityItem[]>(INITIAL_ACTIVITIES)
+  const { activities } = useActivities()
 
   const filteredActivities = activities.filter((activity) => {
     if (selectedFilter === "Todas") {
@@ -109,10 +63,7 @@ export function ActivitiesList() {
   }
 
   const handleViewDetails = (activity: ActivityItem) => {
-    Alert.alert(
-      activity.title,
-      "A tela de detalhes da atividade será implementada em uma etapa futura."
-    )
+    router.push(`/activity-details?id=${activity.id}`)
   }
 
   const renderDisciplineIcon = (
@@ -316,7 +267,7 @@ export function ActivitiesList() {
                     <Text style={styles.cardTitle}>{activity.title}</Text>
 
                     <Text style={styles.cardDescription}>
-                      {activity.description}
+                      {activity.summary || activity.description}
                     </Text>
 
                     <View style={styles.cardDivider} />

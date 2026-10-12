@@ -1,18 +1,18 @@
-import { Text, View } from "react-native";
-import { styles } from "./style";
+import { Text, View } from "react-native"
+import { styles } from "./style"
 
 type CourseCardProps = {
-  title: string;
-  teacher: string;
-  time: string;
-  room: string;
-  borderColor: string;
-  pendings?: string;
-  icon?: React.ReactNode;
-  timeIcon?: React.ReactNode;
-  roomIcon?: React.ReactNode;
-  teacherIcon?: React.ReactNode;
-};
+  title: string
+  teacher: string
+  time: string
+  room: string
+  borderColor: string
+  pendings?: string
+  icon?: React.ReactNode
+  timeIcon?: React.ReactNode
+  roomIcon?: React.ReactNode
+  teacherIcon?: React.ReactNode
+}
 
 export default function CourseCard({
   title,
@@ -54,5 +54,5 @@ export default function CourseCard({
         <Text style={styles.infoText}>{room}</Text>
       </View>
     </View>
-  );
+  )
 }
