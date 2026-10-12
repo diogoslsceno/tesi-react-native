@@ -15,8 +15,6 @@ export const colors = {
     green: "#007432",
     muted: "#6B7280",
     orangeDark: "#943700",
-    darkRed: "#93000A",
-    secundaryOpacity30: "rgba(67, 70, 85, 0.3)",
   },
   background: {
     primary: "#FAF8FF",
@@ -27,6 +25,7 @@ export const colors = {
     green: "#6BFF8F",
     blue: "#EDEDF9",
     card: "#FFFFFF",
+    orange: "#FFDAD6",
     badgeOrange: "rgba(188, 72, 0, 0.1)",
     dashedAdd: "rgba(243, 243, 254, 0.5)",
   },
