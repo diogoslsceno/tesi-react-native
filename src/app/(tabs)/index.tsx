@@ -27,7 +27,11 @@ export default function Index() {
               accessibilityRole="button"
               accessibilityLabel="Notificações"
             >
-              <Ionicons name="notifications" size={22} color={colors.primary} />
+              <Ionicons
+                name="notifications-outline"
+                size={22}
+                color={colors.primary}
+              />
               <View style={styles.notificationBadge} />
             </TouchableOpacity>
           </View>

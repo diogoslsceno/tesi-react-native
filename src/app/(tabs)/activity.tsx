@@ -1,5 +1,5 @@
-import { ActivitiesList } from "@/components/activitiesList"
 import { ActivityCard } from "@/components/activityCard"
+import { ActivitiesList } from "@/components/activityList"
 import { useLocalSearchParams } from "expo-router"
 
 export default function Activity() {

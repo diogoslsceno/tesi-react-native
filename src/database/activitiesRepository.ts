@@ -2,7 +2,7 @@ import {
   ActivityItem,
   ActivityPriorityType,
   ActivityStatusType,
-} from "@/components/activitiesList"
+} from "@/components/activityList"
 import { type SQLiteDatabase } from "expo-sqlite"
 
 interface ActivityRow {
@@ -23,7 +23,9 @@ interface ActivityRow {
 }
 
 function mapRowToActivity(row: ActivityRow): ActivityItem {
-  let categories: ("Pendentes" | "Em andamento" | "Concluídas")[] = ["Pendentes"]
+  let categories: ("Pendentes" | "Em andamento" | "Concluídas")[] = [
+    "Pendentes",
+  ]
   try {
     categories = JSON.parse(row.categories)
   } catch {
@@ -142,13 +144,13 @@ export const activitiesRepository = {
     const newStatusType: ActivityStatusType = newIsCompleted
       ? "concluida"
       : isUrgent
-      ? "urgente"
-      : "proxima"
+        ? "urgente"
+        : "proxima"
     const newStatusLabel = newIsCompleted
       ? "Concluída"
       : isUrgent
-      ? "Urgente"
-      : "Próxima"
+        ? "Urgente"
+        : "Próxima"
     const newActionText = newIsCompleted ? "Entregue" : "Ver detalhes"
     const newCategories: ("Pendentes" | "Em andamento" | "Concluídas")[] =
       newIsCompleted ? ["Concluídas"] : ["Pendentes"]

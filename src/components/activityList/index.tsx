@@ -245,7 +245,14 @@ export function ActivitiesList() {
             filteredActivities.map((activity) => {
               const isCompleted = activity.isCompleted
               return (
-                <View key={activity.id} style={styles.card}>
+                <TouchableOpacity
+                  key={activity.id}
+                  style={styles.card}
+                  activeOpacity={0.85}
+                  onPress={() => handleViewDetails(activity)}
+                  accessibilityRole="button"
+                  accessibilityLabel={`Abrir detalhes de ${activity.title}`}
+                >
                   <View
                     style={[
                       styles.cardStripe,
@@ -285,18 +292,13 @@ export function ActivitiesList() {
                           {activity.actionText || "Entregue"}
                         </Text>
                       ) : (
-                        <TouchableOpacity
-                          activeOpacity={0.7}
-                          onPress={() => handleViewDetails(activity)}
-                        >
-                          <Text style={styles.cardActionText}>
-                            {activity.actionText || "Ver detalhes"}
-                          </Text>
-                        </TouchableOpacity>
+                        <Text style={styles.cardActionText}>
+                          {activity.actionText || "Ver detalhes"}
+                        </Text>
                       )}
                     </View>
                   </View>
-                </View>
+                </TouchableOpacity>
               )
             })
           )}

@@ -1,4 +1,4 @@
-import { ActivityPriorityType } from "@/components/activitiesList"
+import { ActivityPriorityType } from "@/components/activityList"
 import { Button } from "@/components/button"
 import { useActivities } from "@/contexts/ActivitiesContext"
 import { colors } from "@/styles/colors"
@@ -63,6 +63,20 @@ export function ActivityCard() {
     }
   }
 
+  const handleDateChange = (text: string) => {
+    const cleaned = text.replace(/[^0-9]/g, "")
+    let formatted = cleaned
+
+    if (cleaned.length > 2) {
+      formatted = `${cleaned.slice(0, 2)}/${cleaned.slice(2, 4)}`
+    }
+    if (cleaned.length > 4) {
+      formatted = `${cleaned.slice(0, 2)}/${cleaned.slice(2, 4)}/${cleaned.slice(4, 8)}`
+    }
+
+    setDeliveryDate(formatted)
+  }
+
   const handleSelectQuickDate = (daysToAdd: number) => {
     const targetDate = new Date()
     targetDate.setDate(targetDate.getDate() + daysToAdd)
@@ -71,7 +85,7 @@ export function ActivityCard() {
     const month = String(targetDate.getMonth() + 1).padStart(2, "0")
     const year = targetDate.getFullYear()
 
-    setDeliveryDate(`${day}/${month}/${year}`)
+    setDeliveryDate(`${month}/${day}/${year}`)
     setIsDateModalOpen(false)
   }
 
@@ -147,12 +161,13 @@ export function ActivityCard() {
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
     >
       <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={true}
+        contentContainerStyle={[styles.content, { paddingBottom: 120 }]}
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.header}>
@@ -172,7 +187,11 @@ export function ActivityCard() {
             style={styles.headerButton}
             accessibilityLabel="Notificações"
           >
-            <Ionicons name="notifications" size={22} color={colors.primary} />
+            <Ionicons
+              name="notifications-outline"
+              size={22}
+              color={colors.primary}
+            />
           </TouchableOpacity>
         </View>
 
@@ -225,7 +244,7 @@ export function ActivityCard() {
                 placeholder="mm/dd/yyyy"
                 placeholderTextColor={colors.text.muted}
                 value={deliveryDate}
-                onChangeText={setDeliveryDate}
+                onChangeText={handleDateChange}
                 keyboardType="numeric"
                 maxLength={10}
                 style={[styles.input, styles.dateInput]}
@@ -239,7 +258,7 @@ export function ActivityCard() {
                   name="calendar"
                   size={20}
                   color={colors.primary}
-                  style={{ color: colors.primary }}
+                  style={{ color: colors.text.primary }}
                 />
               </TouchableOpacity>
             </View>

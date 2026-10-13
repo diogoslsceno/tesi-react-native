@@ -1,7 +1,5 @@
 # Rotina Acadêmica — Contexto Geral do Repositório
 
-> **Conversa de referência:** `agy resume 0746f4b5-6b12-4b29-9de3-738906f89e8d`
-
 ---
 
 ## Visão Geral
@@ -40,13 +38,13 @@ rotina-academica/
 │   │       └── profile.tsx          # Tela Perfil
 │   │
 │   ├── components/
-│   │   ├── activitiesList/          # ⭐ Listagem "Atividades e Prazos"
+│   │   ├── activityList/            # Listagem "Atividades e Prazos"
 │   │   │   ├── index.tsx
 │   │   │   └── style.ts
 │   │   ├── activityCard/            # Formulário "Nova Atividade" / "Editar Atividade"
 │   │   │   ├── index.tsx
 │   │   │   └── style.ts
-│   │   ├── activityDetails/         # ⭐ Tela completa "Detalhes da Atividade"
+│   │   ├── activityDetails/         # Tela completa "Detalhes da Atividade"
 │   │   │   ├── index.tsx
 │   │   │   └── style.ts
 │   │   ├── profileCard/             # Card completo da tela Perfil
@@ -79,7 +77,7 @@ rotina-academica/
 │   ├── contexts/
 │   │   └── ActivitiesContext.tsx    # Contexto reativo alimentado pelo SQLite
 │   │
-│   ├── database/                    # ⭐ Camada do Banco de Dados Local (SQLite)
+│   ├── database/                    # Camada do Banco de Dados Local (SQLite)
 │   │   ├── initializeDatabase.ts    # Inicialização, tabelas e seed automático
 │   │   └── activitiesRepository.ts  # Consultas SQL e operações CRUD
 │   │
@@ -183,7 +181,7 @@ fontFamily.bold      // Manrope_700Bold
 
 ## Componentes Principais
 
-### `ActivitiesList` — `src/components/activitiesList/`
+### `ActivitiesList` — `src/components/activityList/`
 Tela principal de "Atividades e Prazos".
 - **Resumo vs Descrição:** Exibe `activity.summary` abaixo do título (com fallback para `activity.description`), preservando textos compactos nos cartões.
 - **Filtros Funcionais:** Todas · Pendentes · Em andamento · Concluídas.

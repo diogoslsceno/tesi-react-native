@@ -1,4 +1,4 @@
-import { ActivityItem } from "@/components/activitiesList"
+import { ActivityItem } from "@/components/activityList"
 import { activitiesRepository } from "@/database/activitiesRepository"
 import { useSQLiteContext } from "expo-sqlite"
 import {
