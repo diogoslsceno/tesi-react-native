@@ -1,5 +1,6 @@
 import { Loading } from "@/components/loading"
 import { ActivitiesProvider } from "@/contexts/ActivitiesContext"
+import { initializeDatabase } from "@/database/initializeDatabase"
 import {
   Manrope_300Light,
   Manrope_400Regular,
@@ -9,6 +10,7 @@ import {
   useFonts,
 } from "@expo-google-fonts/manrope"
 import { Stack } from "expo-router"
+import { SQLiteProvider } from "expo-sqlite"
 import { Text, View } from "react-native"
 
 export default function RootLayout() {
@@ -36,17 +38,22 @@ export default function RootLayout() {
   }
 
   return (
-    <ActivitiesProvider>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="index" />
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="new-activity" />
-        <Stack.Screen name="activity-details" />
-      </Stack>
-    </ActivitiesProvider>
+    <SQLiteProvider
+      databaseName="rotina_academica.db"
+      onInit={initializeDatabase}
+    >
+      <ActivitiesProvider>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="index" />
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="new-activity" />
+          <Stack.Screen name="activity-details" />
+        </Stack>
+      </ActivitiesProvider>
+    </SQLiteProvider>
   )
 }

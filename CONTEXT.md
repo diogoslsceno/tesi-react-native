@@ -8,7 +8,7 @@
 
 Aplicativo mobile acadêmico desenvolvido em **React Native + Expo + TypeScript** com **Expo Router** para navegação. O objetivo é permitir que estudantes organizem disciplinas, atividades e prazos de forma visual e intuitiva.
 
-- **Stack:** React Native 0.86.3 · Expo SDK 57 · TypeScript 6 · Expo Router 57
+- **Stack:** React Native 0.86.3 · Expo SDK 57 · TypeScript 6 · Expo Router 57 · expo-sqlite (Banco local)
 - **Pacote gestor:** npm (`package-lock.json` presente)
 - **Fontes:** Manrope (300–700) via `@expo-google-fonts/manrope`
 - **Ícones:** `@expo/vector-icons` (AntDesign, Feather, FontAwesome6, Ionicons, MaterialCommunityIcons, MaterialIcons)
@@ -28,7 +28,7 @@ rotina-academica/
 │
 ├── src/
 │   ├── app/
-│   │   ├── _layout.tsx              # Root Stack — carrega fontes e engloba ActivitiesProvider
+│   │   ├── _layout.tsx              # Root Stack — SQLiteProvider + ActivitiesProvider
 │   │   ├── index.tsx                # Redirect para /(tabs)
 │   │   ├── new-activity.tsx         # Redirect para /(tabs)/activity?form=true
 │   │   ├── activity-details.tsx     # Rota da tela de Detalhes da Atividade
@@ -77,7 +77,11 @@ rotina-academica/
 │   │       └── index.tsx
 │   │
 │   ├── contexts/
-│   │   └── ActivitiesContext.tsx    # Contexto global gerenciador do estado das atividades
+│   │   └── ActivitiesContext.tsx    # Contexto reativo alimentado pelo SQLite
+│   │
+│   ├── database/                    # ⭐ Camada do Banco de Dados Local (SQLite)
+│   │   ├── initializeDatabase.ts    # Inicialização, tabelas e seed automático
+│   │   └── activitiesRepository.ts  # Consultas SQL e operações CRUD
 │   │
 │   ├── screens/
 │   │   └── index-style.ts           # Estilos da tela Início
@@ -93,7 +97,7 @@ rotina-academica/
 ## Roteamento (Expo Router)
 
 ### Root Stack — `src/app/_layout.tsx`
-Carrega as fontes Manrope, engloba a árvore no `ActivitiesProvider` e declara o Stack raiz:
+Carrega as fontes Manrope, engloba a árvore no `SQLiteProvider` (com `initializeDatabase`), depois no `ActivitiesProvider` e declara o Stack raiz:
 
 | Rota               | Destino                                                      |
 |--------------------|--------------------------------------------------------------|
@@ -215,19 +219,22 @@ Cards numéricos da tela Início.
 
 ---
 
-## Estado Global e Persistência
+## Estado Global e Persistência (SQLite)
 
-Camada de contexto centralizada em `src/contexts/ActivitiesContext.tsx`:
-- Provedor: `ActivitiesProvider` (envolve a aplicação no `RootLayout`).
+Camada de contexto reativa em `src/contexts/ActivitiesContext.tsx` integrada ao banco SQLite local (`expo-sqlite`):
+- Provedor Raiz: `SQLiteProvider` (`databaseName="rotina_academica.db"`, `onInit={initializeDatabase}`).
+- Provedor de Estado: `ActivitiesProvider` (consome `useSQLiteContext()`).
+- Repositório SQL: `src/database/activitiesRepository.ts`.
 - Hook: `useActivities()`.
 - **Métodos disponíveis:**
-  - `activities`: Lista completa reativa de atividades.
-  - `completeActivity(id)`: Marca uma atividade como concluída.
-  - `toggleCompleteActivity(id)`: Alterna entre pendente e concluída, atualizando categorias e badges.
-  - `updateActivity(id, updated)`: Atualiza campos específicos da atividade (edição).
-  - `addActivity(newActivity)`: Cadastra nova atividade com ID único.
-  - `deleteActivity(id)`: Remove atividade da lista.
+  - `activities`: Lista completa reativa de atividades lidas do SQLite.
+  - `completeActivity(id)`: Alterna/marca status no banco para concluída.
+  - `toggleCompleteActivity(id)`: Alterna no SQLite entre pendente e concluída, atualizando categorias e badges.
+  - `updateActivity(id, updated)`: Executa UPDATE SQL com os campos alterados.
+  - `addActivity(newActivity)`: Executa INSERT SQL com nova atividade.
+  - `deleteActivity(id)`: Executa DELETE SQL da atividade por ID.
   - `getActivityById(id)`: Recupera a atividade correspondente por ID.
+  - `refreshActivities()`: Recarrega as atividades do SQLite sob demanda.
 
 ---
 
@@ -242,6 +249,7 @@ Camada de contexto centralizada em `src/contexts/ActivitiesContext.tsx`:
 | Perfil                   | ✅ Implementada | Foto, dados do estudante e estatísticas                     |
 | Detalhes da Atividade    | ✅ Implementada | Fiel a `detalhesTela.png`, exibe `description` completa     |
 | Estado global de dados   | ✅ Implementado | `ActivitiesContext` ativo no `RootLayout`                   |
+| Banco de dados local     | ✅ Implementado | `expo-sqlite` com tabelas, seed automático e CRUD completo  |
 
 ---
 
@@ -252,3 +260,4 @@ Camada de contexto centralizada em `src/contexts/ActivitiesContext.tsx`:
 3. **Composição em `SummaryCard`:** Decorações visuais são ativadas via prop opcional sem quebrar a flexibilidade do componente para uso simples (como no cartão de Pendências).
 4. **Sem código nativo manual:** Gerenciamento nativo exclusivo via Expo CNG (`app.json`).
 5. **Paleta Centralizada:** Consumo estrito dos tokens de `src/styles/colors.ts`.
+6. **Persistência Nativa com SQLite (`expo-sqlite`):** Banco relacional embutido e local no app (`rotina_academica.db`), inicializado via `SQLiteProvider` com modo WAL e criação automática de tabelas/seed na primeira execução, garantindo que o banco sobe automaticamente ao rodar o projeto.
