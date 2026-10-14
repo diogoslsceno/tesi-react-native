@@ -1,4 +1,5 @@
 import { useActivities } from "@/contexts/ActivitiesContext"
+import { useProfile } from "@/contexts/ProfileContext"
 import { colors } from "@/styles/colors"
 import {
   AntDesign,
@@ -10,8 +11,6 @@ import { router } from "expo-router"
 import { useState } from "react"
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { styles } from "./style"
-
-const profilePhoto = require("../../../assets/images/profile-photo.png")
 
 export type ActivityFilterType =
   "Todas" | "Pendentes" | "Em andamento" | "Concluídas"
@@ -48,6 +47,7 @@ export function ActivitiesList() {
   const [selectedFilter, setSelectedFilter] =
     useState<ActivityFilterType>("Todas")
   const { activities } = useActivities()
+  const { imageSource } = useProfile()
 
   const filteredActivities = activities.filter((activity) => {
     if (selectedFilter === "Todas") {
@@ -165,7 +165,7 @@ export function ActivitiesList() {
       >
         <View style={styles.header}>
           <View style={styles.headerLeft}>
-            <Image source={profilePhoto} style={styles.headerAvatar} />
+            <Image source={imageSource} style={styles.headerAvatar} />
             <Text style={styles.headerTitle}>Minha Rotina</Text>
           </View>
           <TouchableOpacity

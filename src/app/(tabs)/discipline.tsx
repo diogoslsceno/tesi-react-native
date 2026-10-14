@@ -1,21 +1,22 @@
 import DisciplineCard from "@/components/DisciplineCard"
 import SearchBar from "@/components/SearchBar"
 import { styles } from "@/components/SearchBar/style"
+import { useProfile } from "@/contexts/ProfileContext"
 import { colors } from "@/styles/colors"
 import { Ionicons } from "@expo/vector-icons"
 import { useState } from "react"
 import { Image, ScrollView, Text, View } from "react-native"
 
-const profilePhoto = require("../../../assets/images/profile-photo.png")
-
 export default function Discipline() {
   const [searchQuery, setSearchQuery] = useState<string>("")
+  const { imageSource } = useProfile()
+
   return (
     <ScrollView>
       <View style={styles.screenContainer}>
         <View style={styles.header}>
           <View style={styles.headerLeft}>
-            <Image source={profilePhoto} style={styles.headerAvatar} />
+            <Image source={imageSource} style={styles.headerAvatar} />
             <Text style={styles.headerTitle}>Minha Rotina</Text>
           </View>
           <Ionicons

@@ -1,6 +1,7 @@
 import CourseCard from "@/components/CourseCard"
 import { SummaryCard } from "@/components/SummaryCard"
 import TaskCard from "@/components/TaskCard"
+import { useProfile } from "@/contexts/ProfileContext"
 import { styles } from "@/screens/index-style"
 import { colors } from "@/styles/colors"
 import {
@@ -10,15 +11,17 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons"
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
-const profilePhoto = require("../../../assets/images/profile-photo.png")
+
 export default function Index() {
+  const { imageSource } = useProfile()
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.header}>
             <View style={styles.headerLeft}>
-              <Image source={profilePhoto} style={styles.headerAvatar} />
+              <Image source={imageSource} style={styles.headerAvatar} />
               <Text style={styles.headerTitle}>Minha Rotina</Text>
             </View>
             <TouchableOpacity

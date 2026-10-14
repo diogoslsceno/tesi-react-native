@@ -75,7 +75,8 @@ rotina-academica/
 │   │       └── index.tsx
 │   │
 │   ├── contexts/
-│   │   └── ActivitiesContext.tsx    # Contexto reativo alimentado pelo SQLite
+│   │   ├── ActivitiesContext.tsx    # Contexto reativo alimentado pelo SQLite
+│   │   └── ProfileContext.tsx       # Contexto reativo de foto de perfil e persistência local
 │   │
 │   ├── database/                    # Camada do Banco de Dados Local (SQLite)
 │   │   ├── initializeDatabase.ts    # Inicialização, tabelas e seed automático
