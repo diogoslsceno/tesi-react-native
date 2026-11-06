@@ -89,8 +89,12 @@ export function ActivityCard() {
     setIsDateModalOpen(false)
   }
 
-  const handleSave = () => {
-    if (!title.trim()) {
+  const handleSave = async () => {
+    const trimmedTitle = title.trim()
+    const trimmedDeadline = deliveryDate.trim()
+    const trimmedObservations = observations.trim()
+
+    if (!trimmedTitle) {
       Alert.alert(
         "Campo obrigatório",
         "Por favor, informe o título da atividade."
@@ -103,60 +107,85 @@ export function ActivityCard() {
       return
     }
 
-    if (isEditing && id) {
-      updateActivity(id, {
-        title: title.trim(),
+    if (/^\d{2}\/\d{2}\/\d{4}$/.test(trimmedDeadline)) {
+      const [monthStr, dayStr, yearStr] = trimmedDeadline.split("/")
+      const month = Number(monthStr)
+      const day = Number(dayStr)
+      const year = Number(yearStr)
+
+      if (month < 1 || month > 12 || day < 1 || day > 31 || year < 2000) {
+        Alert.alert(
+          "Data inválida",
+          "Por favor, informe uma data válida no formato mm/dd/yyyy."
+        )
+        return
+      }
+    }
+
+    try {
+      if (isEditing && id) {
+        await updateActivity(id, {
+          title: trimmedTitle,
+          discipline: selectedDiscipline,
+          deadline: trimmedDeadline || "Em breve",
+          priority: selectedPriority as ActivityPriorityType,
+          description: trimmedObservations,
+        })
+
+        Alert.alert(
+          "Atividade Atualizada!",
+          `A atividade "${trimmedTitle}" foi atualizada com sucesso.`,
+          [
+            {
+              text: "OK",
+              onPress: () => {
+                router.replace({
+                  pathname: "/activity-details",
+                  params: { id },
+                })
+              },
+            },
+          ]
+        )
+        return
+      }
+
+      const isUrgent = selectedPriority === "Alta"
+      await addActivity({
+        title: trimmedTitle,
+        summary: trimmedObservations || undefined,
         discipline: selectedDiscipline,
-        deadline: deliveryDate.trim() || "Em breve",
+        deadline: trimmedDeadline || "Em breve",
+        disciplineIconName: "book",
+        statusType: isUrgent ? "urgente" : "proxima",
+        statusLabel: isUrgent ? "Urgente" : "Próxima",
+        categories: ["Pendentes"],
+        isCompleted: false,
+        actionText: "Ver detalhes",
         priority: selectedPriority as ActivityPriorityType,
-        description: observations.trim(),
+        description: trimmedObservations,
+        studyTip:
+          "Mantenha o foco e organize seu tempo para concluir esta atividade com êxito.",
       })
 
       Alert.alert(
-        "Atividade Atualizada!",
-        `A atividade "${title}" foi atualizada com sucesso.`,
+        "Atividade Salva!",
+        `A atividade "${trimmedTitle}" para a disciplina "${selectedDiscipline}" foi registrada com sucesso.`,
         [
           {
             text: "OK",
             onPress: () => {
-              router.replace({ pathname: "/activity-details", params: { id } })
+              router.replace("/(tabs)/activity")
             },
           },
         ]
       )
-      return
+    } catch {
+      Alert.alert(
+        "Erro ao salvar",
+        "Não foi possível salvar a atividade. Tente novamente."
+      )
     }
-
-    const isUrgent = selectedPriority === "Alta"
-    addActivity({
-      title: title.trim(),
-      summary: observations.trim() || undefined,
-      discipline: selectedDiscipline,
-      deadline: deliveryDate.trim() || "Em breve",
-      disciplineIconName: "book",
-      statusType: isUrgent ? "urgente" : "proxima",
-      statusLabel: isUrgent ? "Urgente" : "Próxima",
-      categories: ["Pendentes"],
-      isCompleted: false,
-      actionText: "Ver detalhes",
-      priority: selectedPriority as ActivityPriorityType,
-      description: observations.trim(),
-      studyTip:
-        "Mantenha o foco e organize seu tempo para concluir esta atividade com êxito.",
-    })
-
-    Alert.alert(
-      "Atividade Salva!",
-      `A atividade "${title}" para a disciplina "${selectedDiscipline}" foi registrada com sucesso.`,
-      [
-        {
-          text: "OK",
-          onPress: () => {
-            router.replace("/(tabs)/activity")
-          },
-        },
-      ]
-    )
   }
 
   return (
@@ -209,6 +238,7 @@ export function ActivityCard() {
               placeholderTextColor={colors.text.muted}
               value={title}
               onChangeText={setTitle}
+              maxLength={120}
               style={styles.input}
             />
           </View>
@@ -303,6 +333,7 @@ export function ActivityCard() {
               placeholderTextColor={colors.text.muted}
               value={observations}
               onChangeText={setObservations}
+              maxLength={1000}
               multiline
               numberOfLines={4}
               style={[styles.input, styles.inputMultiline]}

@@ -104,27 +104,29 @@ export async function initializeDatabase(db: SQLiteDatabase) {
       },
     ]
 
-    for (const item of initialActivities) {
-      await db.runAsync(
-        `INSERT INTO activities (
-          id, title, summary, description, deadline, discipline, disciplineIconName,
-          statusType, statusLabel, categories, isCompleted, actionText, priority, studyTip
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-        item.id,
-        item.title,
-        item.summary,
-        item.description,
-        item.deadline,
-        item.discipline,
-        item.disciplineIconName,
-        item.statusType,
-        item.statusLabel,
-        item.categories,
-        item.isCompleted,
-        item.actionText,
-        item.priority,
-        item.studyTip
-      )
-    }
+    await db.withTransactionAsync(async () => {
+      for (const item of initialActivities) {
+        await db.runAsync(
+          `INSERT OR IGNORE INTO activities (
+            id, title, summary, description, deadline, discipline, disciplineIconName,
+            statusType, statusLabel, categories, isCompleted, actionText, priority, studyTip
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+          item.id,
+          item.title,
+          item.summary,
+          item.description,
+          item.deadline,
+          item.discipline,
+          item.disciplineIconName,
+          item.statusType,
+          item.statusLabel,
+          item.categories,
+          item.isCompleted,
+          item.actionText,
+          item.priority,
+          item.studyTip
+        )
+      }
+    })
   }
 }

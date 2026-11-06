@@ -12,6 +12,7 @@ import {
 } from "@expo-google-fonts/manrope"
 import { Stack } from "expo-router"
 import { SQLiteProvider } from "expo-sqlite"
+import { StatusBar } from "expo-status-bar"
 import { Text, View } from "react-native"
 
 export default function RootLayout() {
@@ -45,6 +46,7 @@ export default function RootLayout() {
     >
       <ActivitiesProvider>
         <ProfileProvider>
+          <StatusBar style="dark" />
           <Stack
             screenOptions={{
               headerShown: false,

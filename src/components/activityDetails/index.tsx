@@ -36,9 +36,9 @@ export function ActivityDetails() {
     }
   }
 
-  const handleToggleComplete = () => {
+  const handleToggleComplete = async () => {
     if (!activity) return
-    toggleCompleteActivity(activity.id)
+    await toggleCompleteActivity(activity.id)
   }
 
   const handleEdit = () => {
@@ -61,8 +61,8 @@ export function ActivityDetails() {
         {
           text: "Excluir",
           style: "destructive",
-          onPress: () => {
-            deleteActivity(activity.id)
+          onPress: async () => {
+            await deleteActivity(activity.id)
             handleBack()
           },
         },
