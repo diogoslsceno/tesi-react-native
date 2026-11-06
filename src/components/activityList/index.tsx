@@ -176,7 +176,7 @@ export function ActivitiesList() {
             <Ionicons
               name="notifications-outline"
               size={22}
-              color={colors.text.secundary}
+              color={colors.primary}
             />
           </TouchableOpacity>
         </View>

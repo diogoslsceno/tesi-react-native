@@ -24,8 +24,8 @@ export function ProfileCard() {
             <TouchableOpacity activeOpacity={0.7} style={styles.headerIcon}>
               <Ionicons
                 name="notifications-outline"
-                size={20}
-                color={colors.text.secundary}
+                size={22}
+                color={colors.primary}
               />
             </TouchableOpacity>
           </View>

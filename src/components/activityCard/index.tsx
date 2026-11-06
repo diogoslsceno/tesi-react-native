@@ -197,15 +197,15 @@ export function ActivityCard() {
 
         <View style={styles.screenTitleContainer}>
           <Text style={styles.screenTitle}>
-            {isEditing ? "Editar atividade" : "Nova atividade"}
+            {isEditing ? "Editar Atividade" : "Nova Atividade"}
           </Text>
         </View>
 
         <View style={styles.card}>
           <View style={styles.fieldContainer}>
-            <Text style={styles.fieldLabel}>Título da atividade</Text>
+            <Text style={styles.fieldLabel}>Título da Atividade</Text>
             <TextInput
-              placeholder="Ex.: Lista de Exercícios 3"
+              placeholder="Ex: Lista de Exercícios 3"
               placeholderTextColor={colors.text.muted}
               value={title}
               onChangeText={setTitle}
@@ -297,7 +297,7 @@ export function ActivityCard() {
           </View>
 
           <View style={styles.fieldContainer}>
-            <Text style={styles.fieldLabel}>Observações</Text>
+            <Text style={styles.fieldLabel}>Descrição (Opcional)</Text>
             <TextInput
               placeholder="Adicione detalhes, links ou observações importantes sobre esta atividade..."
               placeholderTextColor={colors.text.muted}
@@ -308,17 +308,21 @@ export function ActivityCard() {
               style={[styles.input, styles.inputMultiline]}
             />
           </View>
-        </View>
 
-        <View style={styles.buttonContainer}>
-          <Button
-            text={isEditing ? "Salvar alterações" : "Salvar atividade"}
-            color={colors.primary}
-            icon={
-              <FontAwesome6 name="floppy-disk" size={18} color={colors.white} />
-            }
-            onPress={handleSave}
-          />
+          <View style={styles.buttonContainer}>
+            <Button
+              text={isEditing ? "Salvar alterações" : "Salvar atividade"}
+              color={colors.primary}
+              icon={
+                <FontAwesome6
+                  name="floppy-disk"
+                  size={18}
+                  color={colors.white}
+                />
+              }
+              onPress={handleSave}
+            />
+          </View>
         </View>
       </ScrollView>
 

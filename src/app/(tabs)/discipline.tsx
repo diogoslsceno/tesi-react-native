@@ -21,8 +21,8 @@ export default function Discipline() {
           </View>
           <Ionicons
             name="notifications-outline"
-            size={24}
-            color={colors.text.secundary}
+            size={22}
+            color={colors.primary}
           />
         </View>
 
@@ -38,7 +38,7 @@ export default function Discipline() {
         <View style={styles.headerContent}>
           <View style={styles.card}>
             <DisciplineCard
-              title="Banco de Dados"
+              title="Banco de Dados II"
               teacher="Prof. Roberto Silva"
               time="Seg / Qua - 10:00"
               room="Laboratório 401"
@@ -75,13 +75,13 @@ export default function Discipline() {
           <View style={styles.card}>
             <DisciplineCard
               title="Probabilidade e Estatística"
-              teacher="Profa. Maria Costa"
+              teacher="Prof. Maria Costa"
               time="Ter / Qui - 08:00"
               room="Sala 205"
               borderColor={colors.primary}
               badgeColor={colors.background.orange}
               pendingsColor={colors.text.red}
-              pendings="1 Pendentes"
+              pendings="1 Pendente"
               teacherIcon={
                 <Ionicons
                   name="person-outline"
@@ -112,7 +112,7 @@ export default function Discipline() {
             <DisciplineCard
               title="Psicologia Aplicada"
               teacher="Prof. Carlos Lima"
-              time="sex - 14:00"
+              time="Sex - 14:00"
               room="Auditorio 112"
               borderColor={colors.green}
               badgeColor={colors.background.green}
@@ -146,12 +146,12 @@ export default function Discipline() {
         <View style={styles.headerContent}>
           <View style={styles.card}>
             <DisciplineCard
-              title="Engenharia de Solftware"
-              teacher="Profa. Ana Santos"
+              title="Engenharia de Software"
+              teacher="Prof. Ana Santos"
               time="Seg / Qua - 14:00"
               room="Laboratório 3"
               borderColor={colors.primary}
-              pendings="1 Pendentes"
+              pendings="3 Pendentes"
               pendingsColor={colors.text.red}
               badgeColor={colors.background.orange}
               teacherIcon={

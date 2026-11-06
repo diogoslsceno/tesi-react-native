@@ -10,6 +10,7 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons"
+import { router } from "expo-router"
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 
 export default function Index() {
@@ -31,7 +32,7 @@ export default function Index() {
               accessibilityLabel="Notificações"
             >
               <Ionicons
-                name="notifications-outline"
+                name="notifications"
                 size={22}
                 color={colors.primary}
               />
@@ -39,7 +40,7 @@ export default function Index() {
             </TouchableOpacity>
           </View>
           <View style={styles.titleContent}>
-            <Text style={styles.title}>Olá, Estudante!</Text>
+            <Text style={styles.title}>Olá, estudante!</Text>
             <Text style={styles.subtitle}>Organize sua rotina acadêmica</Text>
           </View>
 
@@ -48,7 +49,7 @@ export default function Index() {
             textColor={colors.orange.Primary}
             title="Pendências"
             subtitle="Para esta semana"
-            decorationColor={colors.background.orange}
+            decorationColor={colors.background.badgeOrangeLight}
             icon={
               <MaterialCommunityIcons
                 name="clipboard-alert"
@@ -96,119 +97,110 @@ export default function Index() {
 
           <View style={styles.headerContent}>
             <Text style={styles.sectionTitle}>Próximas atividades</Text>
-            <TouchableOpacity>
-              <Text style={styles.actionText}>Ver mais</Text>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => router.push("/(tabs)/activity")}
+            >
+              <Text style={styles.actionText}>Ver todas</Text>
             </TouchableOpacity>
           </View>
 
-          <View style={styles.cardContent}>
-            <View style={styles.card}>
-              <TaskCard
-                alertTitle="Pendente"
-                dataTitle="Hoje, 23:59"
-                title="Trabalho Prático de SO"
-                subTitle="Sistemas Operacionais"
-                textColor={colors.orange.segondary}
-                colorBackgroud={colors.background.red}
-              />
-            </View>
-          </View>
+          <View style={styles.cardsList}>
+            <TaskCard
+              alertTitle="Pendente"
+              dataTitle="Hoje, 23:59"
+              title="Trabalho Prático de SO"
+              subTitle="Sistemas Operacionais"
+              textColor={colors.orange.Primary}
+              colorBackgroud={colors.background.badgeOrangeLight}
+            />
 
-          <View style={styles.headerContent}>
-            <View style={styles.card}>
-              <TaskCard
-                alertTitle="Em 3 dias"
-                dataTitle="25 out"
-                title="Lista de Exercícios 4"
-                subTitle="Cálculo Diferencial e Integral III"
-                textColor={colors.text.segondary}
-                colorBackgroud={colors.background.primary}
-              />
-            </View>
+            <TaskCard
+              alertTitle="Em 3 dias"
+              dataTitle="25 Out"
+              title="Lista de Exercícios 4"
+              subTitle="Cálculo Diferencial e Integral III"
+              textColor={colors.text.segondary}
+              colorBackgroud={colors.background.gray}
+            />
           </View>
 
           <View style={styles.headerContent}>
             <Text style={styles.sectionTitle}>Disciplinas do semestre</Text>
           </View>
 
-          <View style={styles.headerContent}>
-            <View style={styles.card}>
-              <CourseCard
-                title="Engenharia de Software"
-                teacher="Prof. João Silva"
-                time="Segundas, 19:00 - 20:40"
-                room="Sala 204 - Bloco B"
-                borderColor={colors.primary}
-                icon={
-                  <Ionicons
-                    name="code-slash-outline"
-                    size={24}
-                    color={colors.icon.gray}
-                  />
-                }
-                teacherIcon={
-                  <Ionicons
-                    name="person-outline"
-                    size={24}
-                    color={colors.text.segondary}
-                  />
-                }
-                timeIcon={
-                  <Ionicons
-                    name="time-outline"
-                    size={24}
-                    color={colors.text.segondary}
-                  />
-                }
-                roomIcon={
-                  <Ionicons
-                    name="location-outline"
-                    size={24}
-                    color={colors.text.segondary}
-                  />
-                }
-              />
-            </View>
-          </View>
+          <View style={styles.cardsList}>
+            <CourseCard
+              title="Engenharia de Software"
+              teacher="Prof. Carlos Almeida"
+              time="Seg, Qua 08:00 - 10:00"
+              room="Sala 302, Bloco C"
+              borderColor={colors.primary}
+              icon={
+                <Ionicons
+                  name="code-slash-outline"
+                  size={20}
+                  color={colors.icon.gray}
+                />
+              }
+              teacherIcon={
+                <Ionicons
+                  name="person-outline"
+                  size={16}
+                  color={colors.text.segondary}
+                />
+              }
+              timeIcon={
+                <Ionicons
+                  name="time-outline"
+                  size={16}
+                  color={colors.text.segondary}
+                />
+              }
+              roomIcon={
+                <Ionicons
+                  name="location-outline"
+                  size={16}
+                  color={colors.text.segondary}
+                />
+              }
+            />
 
-          <View style={styles.headerContent}>
-            <View style={styles.card}>
-              <CourseCard
-                title="Banco de Dados"
-                teacher="Profa. Marina Silva"
-                time="Ter, Qui 10:00 - 12:00"
-                room="Lab 4, Bloco B"
-                borderColor={colors.green}
-                icon={
-                  <FontAwesome
-                    name="server"
-                    size={24}
-                    color={colors.icon.gray}
-                  />
-                }
-                teacherIcon={
-                  <Ionicons
-                    name="person-outline"
-                    size={24}
-                    color={colors.text.segondary}
-                  />
-                }
-                timeIcon={
-                  <Ionicons
-                    name="time-outline"
-                    size={24}
-                    color={colors.text.segondary}
-                  />
-                }
-                roomIcon={
-                  <Ionicons
-                    name="location-outline"
-                    size={24}
-                    color={colors.text.segondary}
-                  />
-                }
-              />
-            </View>
+            <CourseCard
+              title="Banco de Dados"
+              teacher="Profa. Marina Silva"
+              time="Ter, Qui 10:00 - 12:00"
+              room="Lab 4, Bloco B"
+              borderColor={colors.green}
+              icon={
+                <FontAwesome
+                  name="server"
+                  size={18}
+                  color={colors.icon.gray}
+                />
+              }
+              teacherIcon={
+                <Ionicons
+                  name="person-outline"
+                  size={16}
+                  color={colors.text.segondary}
+                />
+              }
+              timeIcon={
+                <Ionicons
+                  name="time-outline"
+                  size={16}
+                  color={colors.text.segondary}
+                />
+              }
+              roomIcon={
+                <Ionicons
+                  name="location-outline"
+                  size={16}
+                  color={colors.text.segondary}
+                />
+              }
+            />
           </View>
         </View>
       </View>

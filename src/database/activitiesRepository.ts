@@ -53,7 +53,15 @@ function mapRowToActivity(row: ActivityRow): ActivityItem {
 export const activitiesRepository = {
   async getAll(db: SQLiteDatabase): Promise<ActivityItem[]> {
     const rows = await db.getAllAsync<ActivityRow>(
-      "SELECT * FROM activities ORDER BY isCompleted ASC, id DESC;"
+      `SELECT * FROM activities
+       ORDER BY
+         isCompleted ASC,
+         CASE statusType
+           WHEN 'urgente' THEN 1
+           WHEN 'proxima' THEN 2
+           ELSE 3
+         END ASC,
+         id DESC;`
     )
     return rows.map(mapRowToActivity)
   },
