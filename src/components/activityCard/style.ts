@@ -149,7 +149,7 @@ export const styles = StyleSheet.create({
     color: colors.text.orangeDark,
   },
   buttonContainer: {
-    marginTop: 24,
+    marginTop: 4,
   },
   // Modal styles for dropdown & date pickers
   modalOverlay: {

@@ -18,17 +18,16 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: colors.white,
-    borderRadius: 8,
+    borderRadius: 12,
     borderWidth: 1,
     borderColor: colors.borderLight,
     overflow: "hidden",
   },
 
   iconContainer: {
-    paddingHorizontal: 12,
+    paddingLeft: 14,
+    paddingRight: 4,
     paddingVertical: 12,
-    borderRightWidth: 1,
-    borderRightColor: colors.borderLight,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -38,13 +37,14 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background.primary,
     paddingHorizontal: 24,
     paddingTop: 64,
+    paddingBottom: 32,
   },
 
   mainTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 26,
+    fontFamily: fontFamily.bold,
     color: colors.text.primary,
-    marginBottom: 12,
+    marginBottom: 14,
   },
 
   headerAvatar: {

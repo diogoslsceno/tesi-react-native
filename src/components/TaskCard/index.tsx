@@ -22,13 +22,15 @@ export default function TaskCard({
     <View style={styles.container}>
       <View style={styles.TopRow}>
         <View style={[styles.barge, { backgroundColor: colorBackgroud }]}>
-          <Text style={[{ color: textColor }]}>{alertTitle}</Text>
+          <Text style={[styles.badgeText, { color: textColor }]}>
+            {alertTitle}
+          </Text>
         </View>
-        <Text style={[{ color: textColor }]}>{dataTitle}</Text>
+        <Text style={[styles.dateText, { color: textColor }]}>{dataTitle}</Text>
       </View>
       <View>
         <Text style={styles.title}>{title}</Text>
-        <Text>{subTitle}</Text>
+        <Text style={styles.subtitle}>{subTitle}</Text>
       </View>
     </View>
   )

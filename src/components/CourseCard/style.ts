@@ -6,21 +6,20 @@ import { StyleSheet } from "react-native"
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    padding: 24,
+    padding: 20,
     borderRadius: 12,
     borderLeftWidth: 6,
-    marginBottom: 16,
   },
 
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
-    marginBottom: 16,
+    alignItems: "center",
+    marginBottom: 12,
   },
 
   title: {
-    fontSize: textSize.title.segundary,
+    fontSize: 17,
     fontFamily: fontFamily.semibold,
     color: colors.text.primary,
     flex: 1,
@@ -45,11 +44,11 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
-    marginTop: 8,
+    marginTop: 6,
   },
 
   infoText: {
-    fontSize: textSize.subtitle.primary,
+    fontSize: 13,
     fontFamily: fontFamily.regular,
     color: colors.text.segondary,
   },

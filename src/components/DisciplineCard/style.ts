@@ -16,12 +16,12 @@ export const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
-    marginBottom: 16,
+    alignItems: "center",
+    marginBottom: 4,
   },
 
   title: {
-    fontSize: textSize.title.segundary,
+    fontSize: 18,
     fontFamily: fontFamily.semibold,
     color: colors.text.primary,
     flex: 1,

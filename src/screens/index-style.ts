@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
   content: {
     paddingTop: Platform.OS === "android" ? 54 : 64,
     paddingHorizontal: 24,
+    paddingBottom: 32,
   },
   header: {
     flexDirection: "row",
@@ -92,6 +93,10 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 32,
+  },
+  cardsList: {
+    gap: 12,
+    marginTop: 16,
   },
   sectionTitle: {
     fontSize: textSize.title.segundary,
