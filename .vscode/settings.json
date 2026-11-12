@@ -4,5 +4,11 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "package.json": "package-lock.json, tsconfig.json, expo-env.d.ts, eslint.config.js, .prettierrc",
+    "README.md": "LICENSE, AGENTS.md"
   }
 }

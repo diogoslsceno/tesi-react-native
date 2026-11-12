@@ -38,6 +38,13 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
+# sqlite
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
 # generated native folders
 /ios
 /android
