@@ -1,57 +1,12 @@
 import DisciplineCard from "@/components/DisciplineCard"
 import SearchBar from "@/components/SearchBar"
-import { styles } from "@/components/SearchBar/style"
+import { DISCIPLINES } from "@/constants/disciplines"
 import { useProfile } from "@/contexts/ProfileContext"
+import { styles } from "@/screens/discipline-style"
 import { colors } from "@/styles/colors"
 import { Ionicons } from "@expo/vector-icons"
 import { useMemo, useState } from "react"
 import { Image, ScrollView, Text, View } from "react-native"
-
-interface DisciplineItem {
-  id: string
-  title: string
-  teacher: string
-  time: string
-  room: string
-  pendings: string
-  isUpToDate?: boolean
-}
-
-const DISCIPLINES: DisciplineItem[] = [
-  {
-    id: "1",
-    title: "Banco de Dados II",
-    teacher: "Prof. Roberto Silva",
-    time: "Seg / Qua - 10:00",
-    room: "Laboratório 401",
-    pendings: "2 Pendentes",
-  },
-  {
-    id: "2",
-    title: "Probabilidade e Estatística",
-    teacher: "Prof. Maria Costa",
-    time: "Ter / Qui - 08:00",
-    room: "Sala 205",
-    pendings: "1 Pendente",
-  },
-  {
-    id: "3",
-    title: "Psicologia Aplicada",
-    teacher: "Prof. Carlos Lima",
-    time: "Sex - 14:00",
-    room: "Auditorio 112",
-    pendings: "Em dia",
-    isUpToDate: true,
-  },
-  {
-    id: "4",
-    title: "Engenharia de Software",
-    teacher: "Prof. Ana Santos",
-    time: "Seg / Qua - 14:00",
-    room: "Laboratório 3",
-    pendings: "3 Pendentes",
-  },
-]
 
 export default function Discipline() {
   const [searchQuery, setSearchQuery] = useState<string>("")

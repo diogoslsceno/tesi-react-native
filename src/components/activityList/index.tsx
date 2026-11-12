@@ -2,6 +2,12 @@ import { useActivities } from "@/contexts/ActivitiesContext"
 import { useProfile } from "@/contexts/ProfileContext"
 import { colors } from "@/styles/colors"
 import {
+  ActivityFilterType,
+  ActivityItem,
+  ActivityPriorityType,
+  ActivityStatusType,
+} from "@/types/activity"
+import {
   AntDesign,
   Feather,
   Ionicons,
@@ -12,28 +18,11 @@ import { useState } from "react"
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { styles } from "./style"
 
-export type ActivityFilterType =
-  "Todas" | "Pendentes" | "Em andamento" | "Concluídas"
-
-export type ActivityStatusType = "urgente" | "proxima" | "concluida"
-
-export type ActivityPriorityType = "Baixa" | "Média" | "Alta"
-
-export interface ActivityItem {
-  id: string
-  title: string
-  summary?: string
-  description: string
-  deadline: string
-  discipline: string
-  disciplineIconName: "book" | "grid" | "code"
-  statusType: ActivityStatusType
-  statusLabel: string
-  categories: ("Pendentes" | "Em andamento" | "Concluídas")[]
-  isCompleted?: boolean
-  actionText?: string
-  priority?: ActivityPriorityType
-  studyTip?: string
+export type {
+  ActivityFilterType,
+  ActivityItem,
+  ActivityPriorityType,
+  ActivityStatusType,
 }
 
 const FILTERS: ActivityFilterType[] = [

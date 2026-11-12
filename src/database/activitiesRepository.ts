@@ -2,7 +2,7 @@ import {
   ActivityItem,
   ActivityPriorityType,
   ActivityStatusType,
-} from "@/components/activityList"
+} from "@/types/activity"
 import { type SQLiteDatabase } from "expo-sqlite"
 
 interface ActivityRow {

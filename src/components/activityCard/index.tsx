@@ -1,7 +1,8 @@
-import { ActivityPriorityType } from "@/components/activityList"
 import { Button } from "@/components/button"
+import { AVAILABLE_DISCIPLINES } from "@/constants/disciplines"
 import { useActivities } from "@/contexts/ActivitiesContext"
 import { colors } from "@/styles/colors"
+import { ActivityPriorityType } from "@/types/activity"
 import { Feather, FontAwesome6, Ionicons } from "@expo/vector-icons"
 import { router, useLocalSearchParams } from "expo-router"
 import { useEffect, useState } from "react"
@@ -18,16 +19,6 @@ import {
   View,
 } from "react-native"
 import { styles } from "./style"
-
-const MOCK_DISCIPLINES = [
-  "Metodologia Científica",
-  "Filosofia",
-  "Estatística",
-  "Desenvolvimento App",
-  "Cálculo I",
-  "Algoritmos",
-  "Estrutura de Dados I",
-]
 
 export function ActivityCard() {
   const { id } = useLocalSearchParams<{ id?: string; mode?: string }>()
@@ -376,7 +367,7 @@ export function ActivityCard() {
               </TouchableOpacity>
             </View>
             <FlatList
-              data={MOCK_DISCIPLINES}
+              data={AVAILABLE_DISCIPLINES}
               keyExtractor={(item) => item}
               renderItem={({ item }) => {
                 const isSelected = selectedDiscipline === item
