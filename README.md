@@ -1,4 +1,4 @@
-# Rotina Acadêmica - TESI
+# Rotina Acadêmica (TESI)
 
 Repositório dedicado ao desenvolvimento do aplicativo **Rotina Acadêmica**, projeto prático da disciplina **Tópicos Especiais em Sistemas de Informação (TESI)**, focado em desenvolvimento mobile multiplataforma com **React Native** e **Expo**.
 
@@ -17,8 +17,9 @@ Repositório dedicado ao desenvolvimento do aplicativo **Rotina Acadêmica**, pr
 Se você clonou este repositório:
 
 ```bash
-# 1. Acesse o diretório do projeto
-cd rotina-academica
+# 1. Clone o repositório e acesse o diretório do projeto
+git clone https://github.com/diogoslsceno/tesi-react-native.git
+cd tesi-react-native
 
 # 2. Instale as dependências
 npm install
@@ -31,10 +32,10 @@ npx expo start
 ```
 
 > **Dica:** No terminal do Expo:
-> - Pressione **`a`** para abrir no Android
-> - Pressione **`i`** para abrir no iOS
-> - Pressione **`w`** para abrir na Web
-> - Ou escaneie o **QR Code** com o aplicativo **Expo Go** no celular.
+> * Pressione **`a`** para abrir no Android
+> * Pressione **`i`** para abrir no iOS
+> * Pressione **`w`** para abrir na Web
+> * Ou escaneie o **QR Code** com o aplicativo **Expo Go** no celular.
 
 ---
 
@@ -48,11 +49,11 @@ npx create-expo-app@latest --template
 
 # Opções selecionadas no assistente:
 # ✔ Choose a template: Navigation (TypeScript)
-# ✔ What is your app named? rotina-academica
+# ✔ What is your app named? tesi-react-native
 # ✔ Select an Expo SDK version: Latest (SDK 57)
 
 # 2. Acesse a pasta e abra no editor
-cd rotina-academica
+cd tesi-react-native
 code .
 
 # 3. Inicie o projeto
