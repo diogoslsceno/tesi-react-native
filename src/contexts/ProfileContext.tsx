@@ -12,7 +12,7 @@ import { Alert, ImageSourcePropType } from "react-native"
 
 const defaultProfilePhoto = require("../../assets/images/profile-photo.png")
 const PROFILE_IMAGE_FILENAME = "profile-photo-custom.jpg"
-const CLEANUP_FLAG_FILENAME = ".profile-photo-cleaned-v1"
+const CLEANUP_FLAG_FILENAME = ".profile-photo-cleaned-v2"
 
 interface ProfileContextData {
   profileImageUri: string | null

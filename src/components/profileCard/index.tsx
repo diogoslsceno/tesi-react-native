@@ -6,11 +6,47 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons"
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
+import {
+  Alert,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native"
 import { styles } from "./style"
 
 export function ProfileCard() {
-  const { imageSource, updateProfilePhoto } = useProfile()
+  const {
+    imageSource,
+    profileImageUri,
+    updateProfilePhoto,
+    removeProfilePhoto,
+  } = useProfile()
+
+  const handleCameraPress = () => {
+    if (!profileImageUri) {
+      updateProfilePhoto()
+      return
+    }
+
+    Alert.alert("Foto de Perfil", "Escolha uma opção para sua foto:", [
+      { text: "Cancelar", style: "cancel" },
+      {
+        text: "Restaurar padrão",
+        style: "destructive",
+        onPress: () => {
+          removeProfilePhoto()
+        },
+      },
+      {
+        text: "Escolher outra",
+        onPress: () => {
+          updateProfilePhoto()
+        },
+      },
+    ])
+  }
 
   return (
     <View style={styles.container}>
@@ -36,7 +72,7 @@ export function ProfileCard() {
               <TouchableOpacity
                 activeOpacity={0.8}
                 style={styles.cameraButton}
-                onPress={updateProfilePhoto}
+                onPress={handleCameraPress}
               >
                 <View style={styles.cameraInner}>
                   <FontAwesome name="camera" size={14} color={colors.primary} />
